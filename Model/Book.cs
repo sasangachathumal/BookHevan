@@ -22,8 +22,9 @@ namespace BookHevan.Model
         public string isbn { get; set; }
         public decimal price { get; set; }
         public int quantity { get; set; }
+        public string supplier { get; set; }
 
-        public Book(int id, string title, string author, string genre, string isbn, decimal price, int quantity)
+        public Book(int id, string title, string author, string genre, string isbn, decimal price, int quantity, string supplier)
         {
             this.id = id;
             this.title = title;
@@ -32,6 +33,7 @@ namespace BookHevan.Model
             this.isbn = isbn;
             this.price = price;
             this.quantity = quantity;
+            this.supplier = supplier;
         }
 
         public Book(string title, string author, string genre, string isbn, decimal price, int quantity)
@@ -60,19 +62,20 @@ namespace BookHevan.Model
         public bool create()
         {
             if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(author) || string.IsNullOrEmpty(isbn) ||
-                string.IsNullOrEmpty(genre) || !decimal.IsPositive(price) || !int.IsPositive(quantity))
+                string.IsNullOrEmpty(genre) || !decimal.IsPositive(price) || !int.IsPositive(quantity) ||
+                string.IsNullOrEmpty(supplier))
             {
                 return false;
             }
             try
             {
                 connection.Open();
-                string query = "INSERT INTO book (title, author, genre, isbn, price, quantity)" +
-                    " VALUES (@title, @author, @genre, @isbn, @price, @quantity)";
+                string query = "INSERT INTO book (supplier, title, author, genre, isbn, price, quantity)" +
+                    " VALUES (@supplier, @title, @author, @genre, @isbn, @price, @quantity)";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
-
+                    cmd.Parameters.AddWithValue("@supplier", supplier);
                     cmd.Parameters.AddWithValue("@title", title);
                     cmd.Parameters.AddWithValue("@author", author);
                     cmd.Parameters.AddWithValue("@genre", genre);
@@ -230,6 +233,7 @@ namespace BookHevan.Model
                             book.isbn = reader.GetString(4);
                             book.price = reader.GetDecimal(5);
                             book.quantity = reader.GetInt32(6);
+                            book.supplier = reader.GetString(7);
                             connection.Close();
                             return book;
                         }
@@ -262,7 +266,7 @@ namespace BookHevan.Model
             try
             {
                 connection.Open();
-                string query = "SELECT id as 'Book ID', title, author, genre, isbn, price, quantity FROM book";
+                string query = "SELECT id as 'Book ID', title, author, genre, isbn, price, quantity, supplier FROM book";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
@@ -294,7 +298,7 @@ namespace BookHevan.Model
             try
             {
                 connection.Open();
-                string query = "SELECT id as 'Book ID', title, author, genre, isbn, price, quantity FROM book"+
+                string query = "SELECT id as 'Book ID', title, author, genre, isbn, price, quantity, supplier FROM book" +
                     " WHERE title LIKE @title";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
@@ -326,7 +330,7 @@ namespace BookHevan.Model
             try
             {
                 connection.Open();
-                string query = "SELECT id as 'Book ID', title, author, genre, isbn, price, quantity FROM book" +
+                string query = "SELECT id as 'Book ID', title, author, genre, isbn, price, quantity, supplier FROM book" +
                     " WHERE title = @title";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
@@ -358,7 +362,7 @@ namespace BookHevan.Model
             try
             {
                 connection.Open();
-                string query = "SELECT id as 'Book ID', title, author, genre, isbn, price, quantity FROM book" +
+                string query = "SELECT id as 'Book ID', title, author, genre, isbn, price, quantity, supplier FROM book" +
                     " WHERE author = @author";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
@@ -390,7 +394,7 @@ namespace BookHevan.Model
             try
             {
                 connection.Open();
-                string query = "SELECT id as 'Book ID', title, author, genre, isbn, price, quantity FROM book" +
+                string query = "SELECT id as 'Book ID', title, author, genre, isbn, price, quantity, supplier FROM book" +
                     " WHERE genre = @genre";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
@@ -462,7 +466,7 @@ namespace BookHevan.Model
             try
             {
                 connection.Open();
-                string query = "SELECT id as 'Book ID', title, author, genre, isbn, price, quantity FROM book" +
+                string query = "SELECT id as 'Book ID', title, author, genre, isbn, price, quantity, supplier FROM book" +
                     " WHERE title LIKE @title OR isbn LIKE @isbn";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))

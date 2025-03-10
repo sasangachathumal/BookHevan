@@ -40,6 +40,8 @@
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
             groupBox3 = new GroupBox();
+            button1 = new Button();
+            btnLogout = new Button();
             SuspendLayout();
             // 
             // btnClose
@@ -108,7 +110,7 @@
             btnCustomerManagement.FlatStyle = FlatStyle.Flat;
             btnCustomerManagement.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnCustomerManagement.ForeColor = Color.White;
-            btnCustomerManagement.Location = new Point(127, 174);
+            btnCustomerManagement.Location = new Point(12, 174);
             btnCustomerManagement.Name = "btnCustomerManagement";
             btnCustomerManagement.Size = new Size(218, 44);
             btnCustomerManagement.TabIndex = 22;
@@ -146,6 +148,7 @@
             btnSupplierOrder.TabIndex = 25;
             btnSupplierOrder.Text = "Supplier Order";
             btnSupplierOrder.UseVisualStyleBackColor = false;
+            btnSupplierOrder.Click += btnSupplierOrder_Click;
             // 
             // btnSupplierManagement
             // 
@@ -155,7 +158,7 @@
             btnSupplierManagement.FlatStyle = FlatStyle.Flat;
             btnSupplierManagement.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnSupplierManagement.ForeColor = Color.White;
-            btnSupplierManagement.Location = new Point(365, 174);
+            btnSupplierManagement.Location = new Point(250, 174);
             btnSupplierManagement.Name = "btnSupplierManagement";
             btnSupplierManagement.Size = new Size(218, 44);
             btnSupplierManagement.TabIndex = 24;
@@ -171,7 +174,7 @@
             btnUserManagement.FlatStyle = FlatStyle.Flat;
             btnUserManagement.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnUserManagement.ForeColor = Color.White;
-            btnUserManagement.Location = new Point(604, 174);
+            btnUserManagement.Location = new Point(489, 174);
             btnUserManagement.Name = "btnUserManagement";
             btnUserManagement.Size = new Size(218, 44);
             btnUserManagement.TabIndex = 26;
@@ -206,13 +209,46 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "groupBox3";
             // 
+            // button1
+            // 
+            button1.BackColor = Color.DarkOrange;
+            button1.Cursor = Cursors.Hand;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(725, 174);
+            button1.Name = "button1";
+            button1.Size = new Size(218, 44);
+            button1.TabIndex = 29;
+            button1.Text = "Sales Reports";
+            button1.UseVisualStyleBackColor = false;
+            // 
+            // btnLogout
+            // 
+            btnLogout.BackColor = Color.SteelBlue;
+            btnLogout.Cursor = Cursors.Hand;
+            btnLogout.FlatAppearance.BorderSize = 0;
+            btnLogout.FlatStyle = FlatStyle.Flat;
+            btnLogout.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnLogout.ForeColor = Color.White;
+            btnLogout.Location = new Point(12, 9);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(86, 32);
+            btnLogout.TabIndex = 30;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = false;
+            btnLogout.Click += btnLogout_Click;
+            // 
             // AdminDashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(958, 704);
+            ClientSize = new Size(958, 603);
             ControlBox = false;
+            Controls.Add(btnLogout);
+            Controls.Add(button1);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
@@ -247,5 +283,7 @@
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private GroupBox groupBox3;
+        private Button button1;
+        private Button btnLogout;
     }
 }

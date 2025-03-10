@@ -236,6 +236,50 @@ namespace BookHevan.Model
             }
         }
 
+        public static Supplier searchByName(string supplierName)
+        {
+            Supplier supplier = new Supplier();
+
+            if (string.IsNullOrEmpty(supplierName)) { return supplier; }
+
+            try
+            {
+                connection.Open();
+                string query = "SELECT * FROM supplier WHERE name=@name";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@name", supplierName);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+
+                            supplier.id = reader.GetInt32(0);
+                            supplier.name = reader.GetString(1);
+                            supplier.email = reader.GetString(2);
+                            supplier.phoneNo = reader.GetString(3);
+                            supplier.address = reader.GetString(4);
+                            connection.Close();
+                            return supplier;
+                        }
+                        else
+                        {
+                            connection.Close();
+                            return supplier;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                connection.Close();
+                return supplier;
+            }
+        }
+
         /*
          * This method return a data table object with suppliers.
          * @return

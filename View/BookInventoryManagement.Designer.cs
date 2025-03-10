@@ -34,6 +34,8 @@
             label2 = new Label();
             btnSearch = new Button();
             groupBox2 = new GroupBox();
+            txtOrderQuantity = new TextBox();
+            btnSupplierOrder = new Button();
             dgvBooks = new DataGridView();
             btnClear = new Button();
             btnDelete = new Button();
@@ -45,6 +47,8 @@
             label3 = new Label();
             txtAuthor = new TextBox();
             groupBox1 = new GroupBox();
+            comSupplier = new ComboBox();
+            label8 = new Label();
             txtStockQuantity = new TextBox();
             label7 = new Label();
             txtGenre = new TextBox();
@@ -119,15 +123,42 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(txtOrderQuantity);
+            groupBox2.Controls.Add(btnSupplierOrder);
             groupBox2.Controls.Add(btnSearch);
             groupBox2.Controls.Add(txtSearchWord);
             groupBox2.Controls.Add(dgvBooks);
-            groupBox2.Location = new Point(12, 258);
+            groupBox2.Location = new Point(12, 289);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(965, 384);
             groupBox2.TabIndex = 10;
             groupBox2.TabStop = false;
             groupBox2.Text = "Search books";
+            // 
+            // txtOrderQuantity
+            // 
+            txtOrderQuantity.Font = new Font("Segoe UI", 12F);
+            txtOrderQuantity.Location = new Point(673, 21);
+            txtOrderQuantity.Name = "txtOrderQuantity";
+            txtOrderQuantity.PlaceholderText = "Order quantity";
+            txtOrderQuantity.Size = new Size(148, 29);
+            txtOrderQuantity.TabIndex = 14;
+            // 
+            // btnSupplierOrder
+            // 
+            btnSupplierOrder.BackColor = Color.DarkOrange;
+            btnSupplierOrder.Cursor = Cursors.Hand;
+            btnSupplierOrder.FlatAppearance.BorderSize = 0;
+            btnSupplierOrder.FlatStyle = FlatStyle.Flat;
+            btnSupplierOrder.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnSupplierOrder.ForeColor = Color.White;
+            btnSupplierOrder.Location = new Point(827, 21);
+            btnSupplierOrder.Name = "btnSupplierOrder";
+            btnSupplierOrder.Size = new Size(127, 29);
+            btnSupplierOrder.TabIndex = 13;
+            btnSupplierOrder.Text = "Place Order";
+            btnSupplierOrder.UseVisualStyleBackColor = false;
+            btnSupplierOrder.Click += btnSupplierOrder_Click;
             // 
             // dgvBooks
             // 
@@ -157,7 +188,7 @@
             btnClear.FlatStyle = FlatStyle.Flat;
             btnClear.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnClear.ForeColor = Color.White;
-            btnClear.Location = new Point(708, 109);
+            btnClear.Location = new Point(228, 152);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(66, 32);
             btnClear.TabIndex = 9;
@@ -173,7 +204,7 @@
             btnDelete.FlatStyle = FlatStyle.Flat;
             btnDelete.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnDelete.ForeColor = Color.White;
-            btnDelete.Location = new Point(600, 109);
+            btnDelete.Location = new Point(120, 152);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(93, 32);
             btnDelete.TabIndex = 8;
@@ -190,7 +221,7 @@
             btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnSave.ForeColor = Color.White;
-            btnSave.Location = new Point(491, 109);
+            btnSave.Location = new Point(11, 152);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(93, 32);
             btnSave.TabIndex = 7;
@@ -263,6 +294,8 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(comSupplier);
+            groupBox1.Controls.Add(label8);
             groupBox1.Controls.Add(txtStockQuantity);
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(txtGenre);
@@ -280,10 +313,31 @@
             groupBox1.Controls.Add(txtAuthor);
             groupBox1.Location = new Point(12, 87);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(965, 165);
+            groupBox1.Size = new Size(965, 196);
             groupBox1.TabIndex = 15;
             groupBox1.TabStop = false;
             groupBox1.Text = "Book Info";
+            // 
+            // comSupplier
+            // 
+            comSupplier.DropDownStyle = ComboBoxStyle.DropDownList;
+            comSupplier.Font = new Font("Segoe UI", 12F);
+            comSupplier.FormattingEnabled = true;
+            comSupplier.Location = new Point(491, 112);
+            comSupplier.Name = "comSupplier";
+            comSupplier.Size = new Size(221, 29);
+            comSupplier.TabIndex = 18;
+            comSupplier.SelectedIndexChanged += comSupplier_SelectedIndexChanged;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 12F);
+            label8.Location = new Point(491, 88);
+            label8.Name = "label8";
+            label8.Size = new Size(68, 21);
+            label8.TabIndex = 17;
+            label8.Text = "Supplier";
             // 
             // txtStockQuantity
             // 
@@ -344,7 +398,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(989, 654);
+            ClientSize = new Size(989, 682);
             Controls.Add(btnClose);
             Controls.Add(groupBox2);
             Controls.Add(btnHome);
@@ -389,5 +443,9 @@
         private TextBox txtGenre;
         private Label label6;
         private TextBox txtPrice;
+        private ComboBox comSupplier;
+        private Label label8;
+        private Button btnSupplierOrder;
+        private TextBox txtOrderQuantity;
     }
 }

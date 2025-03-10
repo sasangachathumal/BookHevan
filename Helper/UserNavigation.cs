@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookHevan.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,12 +16,11 @@ namespace BookHevan.Helper
                 new AdminDashboard().Show();
                 activeForm.Hide();
             }
-            //else if (UserSession.type == "User")
-            //{
-            //    UserDashboard userDashboard = new UserDashboard();
-            //    userDashboard.Show();
-            //    activeForm.Hide();
-            //}
+            else if (UserSession.type == "Sales Clerk")
+            {
+                new StaffDashboard().Show();
+                activeForm.Hide();
+            }
         }
     }
 }

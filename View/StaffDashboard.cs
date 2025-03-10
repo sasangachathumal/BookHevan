@@ -1,5 +1,4 @@
 ﻿using BookHevan.Helper;
-using BookHevan.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,11 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BookHevan
+namespace BookHevan.View
 {
-    public partial class AdminDashboard : Form
+    public partial class StaffDashboard : Form
     {
-        public AdminDashboard()
+        public StaffDashboard()
         {
             InitializeComponent();
         }
@@ -43,34 +42,16 @@ namespace BookHevan
             this.Hide();
         }
 
-        private void btnSupplierManagement_Click(object sender, EventArgs e)
+        private void btnLogout_Click(object sender, EventArgs e)
         {
-            new SupplierManagement().Show();
-            this.Hide();
-        }
-
-        private void btnUserManagement_Click(object sender, EventArgs e)
-        {
-            new UserManagement().Show();
+            UserSession.Clear();
+            new Login().Show();
             this.Hide();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void btnSupplierOrder_Click(object sender, EventArgs e)
-        {
-            new SupplierOrderManagement().Show();
-            this.Hide();
-        }
-
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-            UserSession.Clear();
-            new Login().Show();
-            this.Hide();
         }
     }
 }

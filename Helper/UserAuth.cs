@@ -1,4 +1,5 @@
 ﻿using BookHevan.Model;
+using BookHevan.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +27,7 @@ namespace BookHevan.Helper
                         }
                         else if (searchUser.type == "Sales Clerk")
                         {
-                            // @TODO navigate to Staff dashboard
-                            return null;
+                            return new StaffDashboard();
                         }
                     }
                     else
