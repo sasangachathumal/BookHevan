@@ -1,4 +1,5 @@
-﻿using BookHevan.Model;
+﻿using BookHevan.Helper;
+using BookHevan.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -259,7 +260,7 @@ namespace BookHevan.View
                     decimal differenceInPrice = searchedBook.price * difference;
                     decimal newAmount = selectedOrder.amount + differenceInPrice;
                     selectedOrder.amount = newAmount;
-                    selectedOrder.noOfItems += difference; 
+                    selectedOrder.noOfItems += difference;
                     bool isOrderUpdateSuccess = selectedOrder.update();
 
                     if (isOrderUpdateSuccess)
@@ -288,6 +289,11 @@ namespace BookHevan.View
             {
                 MessageBox.Show("Order item quantity update fail. Plese try again", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            UserNavigation.navigateToDashboard(this);
         }
     }
 }

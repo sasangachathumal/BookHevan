@@ -138,6 +138,7 @@
             txtPassword.Font = new Font("Segoe UI", 12F);
             txtPassword.Location = new Point(505, 50);
             txtPassword.Name = "txtPassword";
+            txtPassword.PasswordChar = '.';
             txtPassword.Size = new Size(214, 29);
             txtPassword.TabIndex = 3;
             // 
@@ -320,6 +321,7 @@
             btnHome.TabIndex = 11;
             btnHome.Text = "Home";
             btnHome.UseVisualStyleBackColor = false;
+            btnHome.Click += btnHome_Click;
             // 
             // btnClose
             // 

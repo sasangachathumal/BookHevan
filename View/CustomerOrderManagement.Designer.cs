@@ -95,6 +95,7 @@
             btnHome.TabIndex = 14;
             btnHome.Text = "Home";
             btnHome.UseVisualStyleBackColor = false;
+            btnHome.Click += btnHome_Click;
             // 
             // label1
             // 
@@ -318,6 +319,7 @@
             btnUpdateOrderDetail.TabIndex = 31;
             btnUpdateOrderDetail.Text = "Update";
             btnUpdateOrderDetail.UseVisualStyleBackColor = false;
+            btnUpdateOrderDetail.Visible = false;
             btnUpdateOrderDetail.Click += btnUpdateOrderDetail_Click;
             // 
             // label9

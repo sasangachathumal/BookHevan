@@ -31,36 +31,37 @@
             btnClose = new Button();
             btnHome = new Button();
             label1 = new Label();
-            groupBox1 = new GroupBox();
-            dataGridView1 = new DataGridView();
-            button1 = new Button();
-            textBox1 = new TextBox();
             groupBox2 = new GroupBox();
-            label6 = new Label();
-            textBox6 = new TextBox();
-            label5 = new Label();
-            textBox5 = new TextBox();
-            label4 = new Label();
-            textBox4 = new TextBox();
-            label3 = new Label();
-            textBox3 = new TextBox();
-            label2 = new Label();
-            textBox2 = new TextBox();
-            groupBox3 = new GroupBox();
+            txtSearchWord = new TextBox();
             label9 = new Label();
-            textBox9 = new TextBox();
-            label8 = new Label();
-            textBox8 = new TextBox();
-            label7 = new Label();
-            textBox7 = new TextBox();
-            dataGridView2 = new DataGridView();
-            button2 = new Button();
-            button3 = new Button();
-            groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            txtQuantity = new TextBox();
+            btnAddBookToOrder = new Button();
+            dgvBooks = new DataGridView();
+            groupBox3 = new GroupBox();
+            btnClear = new Button();
+            btnSave = new Button();
+            label12 = new Label();
+            txtNetAmount = new TextBox();
+            label11 = new Label();
+            txtDiscount = new TextBox();
+            label10 = new Label();
+            txtTotalAmount = new TextBox();
+            dgvOrderDetail = new DataGridView();
+            groupBox1 = new GroupBox();
+            txtPhoneNo = new TextBox();
+            btnNewCustomer = new Button();
+            lblCustAddress = new Label();
+            lblCustEmail = new Label();
+            lblCustPhoneNumber = new Label();
+            label5 = new Label();
+            label4 = new Label();
+            label3 = new Label();
+            label2 = new Label();
             groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvBooks).BeginInit();
             groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvOrderDetail).BeginInit();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // btnClose
@@ -71,12 +72,13 @@
             btnClose.FlatStyle = FlatStyle.Flat;
             btnClose.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnClose.ForeColor = Color.White;
-            btnClose.Location = new Point(960, 12);
+            btnClose.Location = new Point(1111, 12);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(28, 24);
             btnClose.TabIndex = 16;
             btnClose.Text = "X";
             btnClose.UseVisualStyleBackColor = false;
+            btnClose.Click += btnClose_Click;
             // 
             // btnHome
             // 
@@ -92,282 +94,363 @@
             btnHome.TabIndex = 15;
             btnHome.Text = "Home";
             btnHome.UseVisualStyleBackColor = false;
+            btnHome.Click += btnHome_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
-            label1.Location = new Point(360, 12);
+            label1.Location = new Point(463, 12);
             label1.Name = "label1";
             label1.Size = new Size(228, 45);
             label1.TabIndex = 14;
             label1.Text = "Point Of Sales";
             // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(dataGridView1);
-            groupBox1.Controls.Add(button1);
-            groupBox1.Controls.Add(textBox1);
-            groupBox1.Location = new Point(12, 76);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(667, 294);
-            groupBox1.TabIndex = 17;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "groupBox1";
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 68);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(644, 214);
-            dataGridView1.TabIndex = 2;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(581, 22);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 31);
-            button1.TabIndex = 1;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            textBox1.Font = new Font("Segoe UI", 13F);
-            textBox1.Location = new Point(12, 22);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(563, 31);
-            textBox1.TabIndex = 0;
-            // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(label6);
-            groupBox2.Controls.Add(textBox6);
-            groupBox2.Controls.Add(label5);
-            groupBox2.Controls.Add(textBox5);
-            groupBox2.Controls.Add(label4);
-            groupBox2.Controls.Add(textBox4);
-            groupBox2.Controls.Add(label3);
-            groupBox2.Controls.Add(textBox3);
-            groupBox2.Controls.Add(label2);
-            groupBox2.Controls.Add(textBox2);
-            groupBox2.Location = new Point(685, 76);
+            groupBox2.Controls.Add(txtSearchWord);
+            groupBox2.Controls.Add(label9);
+            groupBox2.Controls.Add(txtQuantity);
+            groupBox2.Controls.Add(btnAddBookToOrder);
+            groupBox2.Controls.Add(dgvBooks);
+            groupBox2.Location = new Point(12, 77);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(303, 294);
-            groupBox2.TabIndex = 18;
+            groupBox2.Size = new Size(774, 260);
+            groupBox2.TabIndex = 26;
             groupBox2.TabStop = false;
-            groupBox2.Text = "groupBox2";
+            groupBox2.Text = "Book Info";
             // 
-            // label6
+            // txtSearchWord
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 12F);
-            label6.Location = new Point(160, 138);
-            label6.Name = "label6";
-            label6.Size = new Size(52, 21);
-            label6.TabIndex = 9;
-            label6.Text = "label6";
-            // 
-            // textBox6
-            // 
-            textBox6.Font = new Font("Segoe UI", 12F);
-            textBox6.Location = new Point(160, 162);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(132, 29);
-            textBox6.TabIndex = 8;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 12F);
-            label5.Location = new Point(8, 229);
-            label5.Name = "label5";
-            label5.Size = new Size(52, 21);
-            label5.TabIndex = 7;
-            label5.Text = "label5";
-            // 
-            // textBox5
-            // 
-            textBox5.Font = new Font("Segoe UI", 12F);
-            textBox5.Location = new Point(8, 253);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(284, 29);
-            textBox5.TabIndex = 6;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F);
-            label4.Location = new Point(8, 138);
-            label4.Name = "label4";
-            label4.Size = new Size(52, 21);
-            label4.TabIndex = 5;
-            label4.Text = "label4";
-            // 
-            // textBox4
-            // 
-            textBox4.Font = new Font("Segoe UI", 12F);
-            textBox4.Location = new Point(8, 162);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(131, 29);
-            textBox4.TabIndex = 4;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12F);
-            label3.Location = new Point(8, 82);
-            label3.Name = "label3";
-            label3.Size = new Size(52, 21);
-            label3.TabIndex = 3;
-            label3.Text = "label3";
-            // 
-            // textBox3
-            // 
-            textBox3.Font = new Font("Segoe UI", 12F);
-            textBox3.Location = new Point(8, 106);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(284, 29);
-            textBox3.TabIndex = 2;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F);
-            label2.Location = new Point(8, 26);
-            label2.Name = "label2";
-            label2.Size = new Size(52, 21);
-            label2.TabIndex = 1;
-            label2.Text = "label2";
-            // 
-            // textBox2
-            // 
-            textBox2.Font = new Font("Segoe UI", 12F);
-            textBox2.Location = new Point(8, 50);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(284, 29);
-            textBox2.TabIndex = 0;
-            // 
-            // groupBox3
-            // 
-            groupBox3.Controls.Add(label9);
-            groupBox3.Controls.Add(textBox9);
-            groupBox3.Controls.Add(label8);
-            groupBox3.Controls.Add(textBox8);
-            groupBox3.Controls.Add(label7);
-            groupBox3.Controls.Add(textBox7);
-            groupBox3.Controls.Add(dataGridView2);
-            groupBox3.Location = new Point(12, 376);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(975, 206);
-            groupBox3.TabIndex = 19;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "groupBox3";
+            txtSearchWord.Font = new Font("Segoe UI", 12F);
+            txtSearchWord.Location = new Point(6, 23);
+            txtSearchWord.Name = "txtSearchWord";
+            txtSearchWord.PlaceholderText = "Enter Book Title or ISBN to search";
+            txtSearchWord.Size = new Size(570, 29);
+            txtSearchWord.TabIndex = 26;
+            txtSearchWord.TextChanged += txtSearchWord_TextChanged;
             // 
             // label9
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 12F);
-            label9.Location = new Point(681, 140);
+            label9.Location = new Point(6, 225);
             label9.Name = "label9";
-            label9.Size = new Size(52, 21);
+            label9.Size = new Size(71, 21);
             label9.TabIndex = 15;
-            label9.Text = "label9";
+            label9.Text = "Quantiry";
             // 
-            // textBox9
+            // txtQuantity
             // 
-            textBox9.Font = new Font("Segoe UI", 12F);
-            textBox9.Location = new Point(681, 164);
-            textBox9.Name = "textBox9";
-            textBox9.Size = new Size(284, 29);
-            textBox9.TabIndex = 14;
+            txtQuantity.Font = new Font("Segoe UI", 12F);
+            txtQuantity.Location = new Point(83, 222);
+            txtQuantity.Name = "txtQuantity";
+            txtQuantity.Size = new Size(219, 29);
+            txtQuantity.TabIndex = 14;
             // 
-            // label8
+            // btnAddBookToOrder
             // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 12F);
-            label8.Location = new Point(681, 79);
-            label8.Name = "label8";
-            label8.Size = new Size(52, 21);
-            label8.TabIndex = 13;
-            label8.Text = "label8";
+            btnAddBookToOrder.BackColor = Color.DarkOrange;
+            btnAddBookToOrder.Cursor = Cursors.Hand;
+            btnAddBookToOrder.FlatAppearance.BorderColor = Color.DarkOrange;
+            btnAddBookToOrder.FlatAppearance.BorderSize = 0;
+            btnAddBookToOrder.FlatStyle = FlatStyle.Flat;
+            btnAddBookToOrder.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnAddBookToOrder.ForeColor = Color.White;
+            btnAddBookToOrder.Location = new Point(675, 222);
+            btnAddBookToOrder.Name = "btnAddBookToOrder";
+            btnAddBookToOrder.Size = new Size(93, 29);
+            btnAddBookToOrder.TabIndex = 13;
+            btnAddBookToOrder.Text = "Add";
+            btnAddBookToOrder.UseVisualStyleBackColor = false;
+            btnAddBookToOrder.Click += btnAddBookToOrder_Click;
             // 
-            // textBox8
+            // dgvBooks
             // 
-            textBox8.Font = new Font("Segoe UI", 12F);
-            textBox8.Location = new Point(681, 103);
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(284, 29);
-            textBox8.TabIndex = 12;
+            dgvBooks.AllowUserToAddRows = false;
+            dgvBooks.AllowUserToDeleteRows = false;
+            dgvBooks.AllowUserToResizeColumns = false;
+            dgvBooks.AllowUserToResizeRows = false;
+            dgvBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvBooks.BackgroundColor = Color.White;
+            dgvBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvBooks.GridColor = Color.Black;
+            dgvBooks.Location = new Point(6, 58);
+            dgvBooks.MultiSelect = false;
+            dgvBooks.Name = "dgvBooks";
+            dgvBooks.ReadOnly = true;
+            dgvBooks.ShowCellToolTips = false;
+            dgvBooks.ShowEditingIcon = false;
+            dgvBooks.ShowRowErrors = false;
+            dgvBooks.Size = new Size(762, 157);
+            dgvBooks.TabIndex = 0;
+            dgvBooks.CellClick += dgvBooks_CellClick;
+            dgvBooks.CellContentClick += dgvBooks_CellContentClick;
             // 
-            // label7
+            // groupBox3
             // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 12F);
-            label7.Location = new Point(681, 19);
-            label7.Name = "label7";
-            label7.Size = new Size(52, 21);
-            label7.TabIndex = 11;
-            label7.Text = "label7";
+            groupBox3.Controls.Add(btnClear);
+            groupBox3.Controls.Add(btnSave);
+            groupBox3.Controls.Add(label12);
+            groupBox3.Controls.Add(txtNetAmount);
+            groupBox3.Controls.Add(label11);
+            groupBox3.Controls.Add(txtDiscount);
+            groupBox3.Controls.Add(label10);
+            groupBox3.Controls.Add(txtTotalAmount);
+            groupBox3.Controls.Add(dgvOrderDetail);
+            groupBox3.Location = new Point(12, 343);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(1127, 230);
+            groupBox3.TabIndex = 27;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Order Details";
             // 
-            // textBox7
+            // btnClear
             // 
-            textBox7.Font = new Font("Segoe UI", 12F);
-            textBox7.Location = new Point(681, 43);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(284, 29);
-            textBox7.TabIndex = 10;
+            btnClear.BackColor = Color.SteelBlue;
+            btnClear.Cursor = Cursors.Hand;
+            btnClear.FlatAppearance.BorderSize = 0;
+            btnClear.FlatStyle = FlatStyle.Flat;
+            btnClear.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnClear.ForeColor = Color.White;
+            btnClear.Location = new Point(1055, 192);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(66, 32);
+            btnClear.TabIndex = 25;
+            btnClear.Text = "Clear";
+            btnClear.UseVisualStyleBackColor = false;
+            btnClear.Click += btnClear_Click;
             // 
-            // dataGridView2
+            // btnSave
             // 
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(12, 22);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.Size = new Size(644, 171);
-            dataGridView2.TabIndex = 0;
+            btnSave.BackColor = Color.DarkOrange;
+            btnSave.Cursor = Cursors.Hand;
+            btnSave.FlatAppearance.BorderColor = Color.DarkOrange;
+            btnSave.FlatAppearance.BorderSize = 0;
+            btnSave.FlatStyle = FlatStyle.Flat;
+            btnSave.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnSave.ForeColor = Color.White;
+            btnSave.Location = new Point(956, 192);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(93, 32);
+            btnSave.TabIndex = 23;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = false;
+            btnSave.Click += btnSave_Click;
             // 
-            // button2
+            // label12
             // 
-            button2.Location = new Point(24, 588);
-            button2.Name = "button2";
-            button2.Size = new Size(119, 33);
-            button2.TabIndex = 20;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 12F);
+            label12.Location = new Point(902, 133);
+            label12.Name = "label12";
+            label12.Size = new Size(95, 21);
+            label12.TabIndex = 21;
+            label12.Text = "Net Amount";
             // 
-            // button3
+            // txtNetAmount
             // 
-            button3.Location = new Point(685, 588);
-            button3.Name = "button3";
-            button3.Size = new Size(119, 33);
-            button3.TabIndex = 21;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            txtNetAmount.Enabled = false;
+            txtNetAmount.Font = new Font("Segoe UI", 12F);
+            txtNetAmount.Location = new Point(902, 157);
+            txtNetAmount.Name = "txtNetAmount";
+            txtNetAmount.Size = new Size(219, 29);
+            txtNetAmount.TabIndex = 22;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 12F);
+            label11.Location = new Point(902, 77);
+            label11.Name = "label11";
+            label11.Size = new Size(71, 21);
+            label11.TabIndex = 19;
+            label11.Text = "Discount";
+            // 
+            // txtDiscount
+            // 
+            txtDiscount.Font = new Font("Segoe UI", 12F);
+            txtDiscount.Location = new Point(902, 101);
+            txtDiscount.Name = "txtDiscount";
+            txtDiscount.Size = new Size(219, 29);
+            txtDiscount.TabIndex = 20;
+            txtDiscount.KeyDown += txtDiscount_KeyDown;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 12F);
+            label10.Location = new Point(902, 21);
+            label10.Name = "label10";
+            label10.Size = new Size(102, 21);
+            label10.TabIndex = 18;
+            label10.Text = "Total Amount";
+            // 
+            // txtTotalAmount
+            // 
+            txtTotalAmount.Font = new Font("Segoe UI", 12F);
+            txtTotalAmount.Location = new Point(902, 45);
+            txtTotalAmount.Name = "txtTotalAmount";
+            txtTotalAmount.Size = new Size(219, 29);
+            txtTotalAmount.TabIndex = 18;
+            // 
+            // dgvOrderDetail
+            // 
+            dgvOrderDetail.AllowUserToAddRows = false;
+            dgvOrderDetail.AllowUserToDeleteRows = false;
+            dgvOrderDetail.AllowUserToResizeColumns = false;
+            dgvOrderDetail.AllowUserToResizeRows = false;
+            dgvOrderDetail.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvOrderDetail.BackgroundColor = Color.White;
+            dgvOrderDetail.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvOrderDetail.GridColor = Color.Black;
+            dgvOrderDetail.Location = new Point(6, 22);
+            dgvOrderDetail.MultiSelect = false;
+            dgvOrderDetail.Name = "dgvOrderDetail";
+            dgvOrderDetail.ReadOnly = true;
+            dgvOrderDetail.ShowCellToolTips = false;
+            dgvOrderDetail.ShowEditingIcon = false;
+            dgvOrderDetail.ShowRowErrors = false;
+            dgvOrderDetail.Size = new Size(890, 164);
+            dgvOrderDetail.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(txtPhoneNo);
+            groupBox1.Controls.Add(btnNewCustomer);
+            groupBox1.Controls.Add(lblCustAddress);
+            groupBox1.Controls.Add(lblCustEmail);
+            groupBox1.Controls.Add(lblCustPhoneNumber);
+            groupBox1.Controls.Add(label5);
+            groupBox1.Controls.Add(label4);
+            groupBox1.Controls.Add(label3);
+            groupBox1.Controls.Add(label2);
+            groupBox1.Location = new Point(792, 77);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(347, 260);
+            groupBox1.TabIndex = 25;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Customer Info";
+            // 
+            // txtPhoneNo
+            // 
+            txtPhoneNo.Font = new Font("Segoe UI", 12F);
+            txtPhoneNo.Location = new Point(6, 43);
+            txtPhoneNo.Name = "txtPhoneNo";
+            txtPhoneNo.Size = new Size(236, 29);
+            txtPhoneNo.TabIndex = 26;
+            txtPhoneNo.TextChanged += txtPhoneNo_TextChanged;
+            txtPhoneNo.KeyDown += txtPhoneNo_KeyDown;
+            // 
+            // btnNewCustomer
+            // 
+            btnNewCustomer.BackColor = Color.DarkOrange;
+            btnNewCustomer.Cursor = Cursors.Hand;
+            btnNewCustomer.FlatAppearance.BorderColor = Color.DarkOrange;
+            btnNewCustomer.FlatAppearance.BorderSize = 0;
+            btnNewCustomer.FlatStyle = FlatStyle.Flat;
+            btnNewCustomer.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnNewCustomer.ForeColor = Color.White;
+            btnNewCustomer.Location = new Point(248, 43);
+            btnNewCustomer.Name = "btnNewCustomer";
+            btnNewCustomer.Size = new Size(93, 29);
+            btnNewCustomer.TabIndex = 27;
+            btnNewCustomer.Text = "+ New";
+            btnNewCustomer.UseVisualStyleBackColor = false;
+            btnNewCustomer.Click += btnNewCustomer_Click;
+            // 
+            // lblCustAddress
+            // 
+            lblCustAddress.AutoSize = true;
+            lblCustAddress.Font = new Font("Segoe UI", 12F);
+            lblCustAddress.Location = new Point(6, 194);
+            lblCustAddress.Name = "lblCustAddress";
+            lblCustAddress.Size = new Size(0, 21);
+            lblCustAddress.TabIndex = 9;
+            // 
+            // lblCustEmail
+            // 
+            lblCustEmail.AutoSize = true;
+            lblCustEmail.Font = new Font("Segoe UI", 12F);
+            lblCustEmail.Location = new Point(6, 100);
+            lblCustEmail.Name = "lblCustEmail";
+            lblCustEmail.Size = new Size(0, 21);
+            lblCustEmail.TabIndex = 8;
+            // 
+            // lblCustPhoneNumber
+            // 
+            lblCustPhoneNumber.AutoSize = true;
+            lblCustPhoneNumber.Font = new Font("Segoe UI", 12F);
+            lblCustPhoneNumber.Location = new Point(6, 147);
+            lblCustPhoneNumber.Name = "lblCustPhoneNumber";
+            lblCustPhoneNumber.Size = new Size(0, 21);
+            lblCustPhoneNumber.TabIndex = 7;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 12F);
+            label5.Location = new Point(6, 173);
+            label5.Name = "label5";
+            label5.Size = new Size(145, 21);
+            label5.TabIndex = 6;
+            label5.Text = "Customer Address :";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 12F);
+            label4.Location = new Point(6, 19);
+            label4.Name = "label4";
+            label4.Size = new Size(188, 21);
+            label4.TabIndex = 5;
+            label4.Text = "Customer Phone Number";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 12F);
+            label3.Location = new Point(6, 79);
+            label3.Name = "label3";
+            label3.Size = new Size(127, 21);
+            label3.TabIndex = 3;
+            label3.Text = "Customer Email :";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 12F);
+            label2.Location = new Point(6, 126);
+            label2.Name = "label2";
+            label2.Size = new Size(131, 21);
+            label2.TabIndex = 1;
+            label2.Text = "Customer Name :";
             // 
             // PointOfSales
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(999, 672);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(groupBox3);
+            BackColor = Color.White;
+            ClientSize = new Size(1152, 583);
             Controls.Add(groupBox2);
+            Controls.Add(groupBox3);
             Controls.Add(groupBox1);
             Controls.Add(btnClose);
             Controls.Add(btnHome);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "PointOfSales";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "PointOfSales";
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            Load += PointOfSales_Load;
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvBooks).EndInit();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvOrderDetail).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -377,30 +460,31 @@
         private Button btnClose;
         private Button btnHome;
         private Label label1;
-        private GroupBox groupBox1;
-        private DataGridView dataGridView1;
-        private Button button1;
-        private TextBox textBox1;
         private GroupBox groupBox2;
-        private Label label2;
-        private TextBox textBox2;
-        private Label label5;
-        private TextBox textBox5;
-        private Label label4;
-        private TextBox textBox4;
-        private Label label3;
-        private TextBox textBox3;
-        private Label label6;
-        private TextBox textBox6;
-        private GroupBox groupBox3;
         private Label label9;
-        private TextBox textBox9;
-        private Label label8;
-        private TextBox textBox8;
-        private Label label7;
-        private TextBox textBox7;
-        private DataGridView dataGridView2;
-        private Button button2;
-        private Button button3;
+        private TextBox txtQuantity;
+        private Button btnAddBookToOrder;
+        private DataGridView dgvBooks;
+        private GroupBox groupBox3;
+        private Button btnClear;
+        private Button btnSave;
+        private Label label12;
+        private TextBox txtNetAmount;
+        private Label label11;
+        private TextBox txtDiscount;
+        private Label label10;
+        private TextBox txtTotalAmount;
+        private DataGridView dgvOrderDetail;
+        private GroupBox groupBox1;
+        private Label lblCustAddress;
+        private Label lblCustEmail;
+        private Label lblCustPhoneNumber;
+        private Label label5;
+        private Label label4;
+        private Label label3;
+        private Label label2;
+        private TextBox txtSearchWord;
+        private Button btnNewCustomer;
+        private TextBox txtPhoneNo;
     }
 }

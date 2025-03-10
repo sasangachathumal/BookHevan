@@ -1,4 +1,5 @@
-﻿using BookHevan.Model;
+﻿using BookHevan.Helper;
+using BookHevan.Model;
 using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
@@ -193,6 +194,11 @@ namespace BookHevan.View
         private void txtSearchWord_KeyDown(object sender, KeyEventArgs e)
         {
             searchBooks();
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            UserNavigation.navigateToDashboard(this);
         }
     }
 }

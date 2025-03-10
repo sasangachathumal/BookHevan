@@ -43,6 +43,12 @@ namespace BookHevan.Model
             this.type = type;
         }
 
+        public User(string username, string password)
+        {
+            this.username = username;
+            this.password = password;
+        }
+
         public User(int id)
         {
             this.id = id;

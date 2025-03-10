@@ -142,12 +142,19 @@ namespace BookHevan.View
                 MessageBox.Show("Please enter quantity", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            int quantity = int.Parse(txtQuantity.Text);
+
+            if (selectedBook.quantity < quantity)
+            {
+                MessageBox.Show("Inventory not available", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             newCustomerOrder.customerId = selectedCustomer.id;
             newCustomerOrder.userId = UserSession.id;
             newCustomerOrder.date = DateTime.Now.ToString("yyyy-MM-dd");
-            newCustomerOrder.noOfItems = (int.Parse(txtQuantity.Text) + newCustomerOrder.noOfItems);
-            newCustomerOrder.amount = (selectedBook.price * int.Parse(txtQuantity.Text));
+            newCustomerOrder.noOfItems = (quantity + newCustomerOrder.noOfItems);
+            //newCustomerOrder.amount = (selectedBook.price * int.Parse(txtQuantity.Text));
 
             orderBookList.Add(new NewOrderBookDetail
             {
@@ -162,10 +169,14 @@ namespace BookHevan.View
             dgvOrderDetail.DataSource = null;
             dgvOrderDetail.DataSource = orderBookList;
 
-            txtTotalAmount.Text = newCustomerOrder.amount.ToString();
+            decimal currentTotalAmount = 0;
             int discount = 0;
             int.TryParse(txtDiscount.Text, out discount);
-            txtNetAmount.Text = (newCustomerOrder.amount - discount).ToString();
+            decimal.TryParse(txtTotalAmount.Text, out currentTotalAmount);
+            decimal newTotalAmount = (selectedBook.price * int.Parse(txtQuantity.Text) + currentTotalAmount);
+
+            txtTotalAmount.Text = newTotalAmount.ToString();
+            txtNetAmount.Text = ((newTotalAmount - discount)).ToString();
         }
 
         private void comTitle_SelectedIndexChanged(object sender, EventArgs e)
@@ -246,15 +257,40 @@ namespace BookHevan.View
                         customerOrderDetails.custOrderId = customerOrder.id;
                         customerOrderDetails.quantity = item.orderQuantity;
                         customerOrderDetails.create();
+
+                        Book searchedBook = Book.searchById(item.id);
+                        if (searchedBook != null)
+                        {
+                            Book.updateQuantity(item.id, (searchedBook.quantity - item.orderQuantity));
+                        }
+
                     }
+
+                    viewRest();
                     MessageBox.Show("Order successfully Placed.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
+                else
+                {
+                    MessageBox.Show("Order not placed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
                 MessageBox.Show("Please select type", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+            }
+        }
+
+        private void txtDiscount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (string.IsNullOrEmpty(txtDiscount.Text))
+                {
+                    MessageBox.Show("Please enter discount", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                txtNetAmount.Text = (decimal.Parse(txtTotalAmount.Text) - decimal.Parse(txtDiscount.Text)).ToString();
             }
         }
     }

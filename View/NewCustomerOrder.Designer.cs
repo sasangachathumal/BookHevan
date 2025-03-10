@@ -134,6 +134,7 @@
             txtDiscount.Name = "txtDiscount";
             txtDiscount.Size = new Size(219, 29);
             txtDiscount.TabIndex = 20;
+            txtDiscount.KeyDown += txtDiscount_KeyDown;
             // 
             // label10
             // 

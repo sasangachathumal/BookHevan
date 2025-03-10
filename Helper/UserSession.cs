@@ -14,7 +14,6 @@ namespace BookHevan.Helper
         public static string username { get; private set; }
         public static string fullName { get; private set; }
         public static string phoneNo { get; private set; }
-
         public static string type { get; private set; }
 
         public static void SetUser(int userId, string username, string fullName, string phoneNo, string userType)

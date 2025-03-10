@@ -222,5 +222,10 @@ namespace BookHevan.View
         {
             searchUsers();
         }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            UserNavigation.navigateToDashboard(this);
+        }
     }
 }

@@ -284,9 +284,6 @@ namespace BookHevan.Model
 
         /*
          * This method return a data table object with books based on provided title.
-         * @return
-         *  - data table object with data: if books succesfuly found in DB.
-         *  - data table object without data: if had any issues or books not available.
         */
         public static DataTable searchByTitleForDataTable(string title)
         {
@@ -399,6 +396,79 @@ namespace BookHevan.Model
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
                     cmd.Parameters.AddWithValue("@genre", genre);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        dataTable.Load(reader);
+                        connection.Close();
+                        return dataTable;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                connection.Close();
+                return dataTable;
+            }
+        }
+
+        public static bool updateQuantity(int id, int quantity)
+        {
+            if (!int.IsPositive(id) || !int.IsPositive(quantity))
+            {
+                return false;
+            }
+            try
+            {
+                connection.Open();
+                string query = "UPDATE book SET quantity = @quantity " +
+                    "WHERE id = @id";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                {
+
+                    cmd.Parameters.AddWithValue("@quantity", quantity);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        connection.Close();
+                        return true;
+                    }
+                    else
+                    {
+                        connection.Close();
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                connection.Close();
+                return false;
+            }
+        }
+
+        public static DataTable searchByKeywordForDataTable(string searchWord)
+        {
+            DataTable dataTable = new DataTable();
+
+            if (searchWord == null) { return dataTable; }
+
+            try
+            {
+                connection.Open();
+                string query = "SELECT id as 'Book ID', title, author, genre, isbn, price, quantity FROM book" +
+                    " WHERE title LIKE @title OR isbn LIKE @isbn";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@title", "%" + searchWord + "%");
+                    cmd.Parameters.AddWithValue("@isbn", "%" + searchWord + "%");
 
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {

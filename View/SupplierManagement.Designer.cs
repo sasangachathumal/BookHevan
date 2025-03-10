@@ -151,6 +151,7 @@
             btnHome.TabIndex = 27;
             btnHome.Text = "Home";
             btnHome.UseVisualStyleBackColor = false;
+            btnHome.Click += btnHome_Click;
             // 
             // txtPhoneNo
             // 

@@ -348,5 +348,49 @@ namespace BookHevan.Model
                 return dataTable;
             }
         }
+
+        public static Customer searchByPhoneNo(string phoneNo)
+        {
+            Customer customer = new Customer();
+
+            if (phoneNo == null) { return customer; }
+
+            try
+            {
+                connection.Open();
+                string query = "SELECT * FROM customer WHERE phoneNo=@phoneNo";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@phoneNo", phoneNo);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+
+                            customer.id = reader.GetInt32(0);
+                            customer.email = reader.GetString(1);
+                            customer.name = reader.GetString(2);
+                            customer.phoneNo = reader.GetString(3);
+                            customer.address = reader.GetString(4);
+                            connection.Close();
+                            return customer;
+                        }
+                        else
+                        {
+                            connection.Close();
+                            return customer;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                connection.Close();
+                return customer;
+            }
+        }
     }
 }

@@ -222,6 +222,7 @@
             btnHome.TabIndex = 17;
             btnHome.Text = "Home";
             btnHome.UseVisualStyleBackColor = false;
+            btnHome.Click += btnHome_Click;
             // 
             // txtISBN
             // 

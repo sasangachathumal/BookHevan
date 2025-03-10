@@ -28,12 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             btnLogin = new Button();
-            textBox1 = new TextBox();
+            txtUsername = new TextBox();
             label1 = new Label();
             label2 = new Label();
-            textBox2 = new TextBox();
+            txtPassword = new TextBox();
             label3 = new Label();
+            pictureBox1 = new PictureBox();
+            btnClose = new Button();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // btnLogin
@@ -47,18 +51,18 @@
             btnLogin.Location = new Point(410, 233);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(315, 32);
-            btnLogin.TabIndex = 0;
+            btnLogin.TabIndex = 2;
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = false;
             btnLogin.Click += btnLogin_Click;
             // 
-            // textBox1
+            // txtUsername
             // 
-            textBox1.Font = new Font("Segoe UI", 12F);
-            textBox1.Location = new Point(410, 117);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(315, 29);
-            textBox1.TabIndex = 1;
+            txtUsername.Font = new Font("Segoe UI", 12F);
+            txtUsername.Location = new Point(410, 117);
+            txtUsername.Name = "txtUsername";
+            txtUsername.Size = new Size(315, 29);
+            txtUsername.TabIndex = 0;
             // 
             // label1
             // 
@@ -80,23 +84,52 @@
             label2.TabIndex = 4;
             label2.Text = "Password";
             // 
-            // textBox2
+            // txtPassword
             // 
-            textBox2.Font = new Font("Segoe UI", 12F);
-            textBox2.Location = new Point(410, 187);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(315, 29);
-            textBox2.TabIndex = 3;
+            txtPassword.Font = new Font("Segoe UI", 12F);
+            txtPassword.Location = new Point(410, 187);
+            txtPassword.Name = "txtPassword";
+            txtPassword.PasswordChar = '.';
+            txtPassword.Size = new Size(315, 29);
+            txtPassword.TabIndex = 1;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            label3.Location = new Point(410, 28);
+            label3.Location = new Point(410, 42);
             label3.Name = "label3";
             label3.Size = new Size(315, 30);
             label3.TabIndex = 5;
             label3.Text = "Welcome Back to BookHevan";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(12, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(378, 265);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 6;
+            pictureBox1.TabStop = false;
+            pictureBox1.WaitOnLoad = true;
+            // 
+            // btnClose
+            // 
+            btnClose.BackColor = Color.Firebrick;
+            btnClose.Cursor = Cursors.Hand;
+            btnClose.FlatAppearance.MouseOverBackColor = Color.Brown;
+            btnClose.FlatStyle = FlatStyle.Flat;
+            btnClose.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
+            btnClose.ForeColor = Color.White;
+            btnClose.Location = new Point(706, 12);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(28, 24);
+            btnClose.TabIndex = 21;
+            btnClose.Text = "X";
+            btnClose.UseVisualStyleBackColor = false;
+            btnClose.Click += btnClose_Click;
             // 
             // Login
             // 
@@ -104,17 +137,21 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(746, 289);
+            ControlBox = false;
+            Controls.Add(btnClose);
+            Controls.Add(pictureBox1);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(textBox2);
+            Controls.Add(txtPassword);
             Controls.Add(label1);
-            Controls.Add(textBox1);
+            Controls.Add(txtUsername);
             Controls.Add(btnLogin);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.None;
             Name = "Login";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -122,10 +159,12 @@
         #endregion
 
         private Button btnLogin;
-        private TextBox textBox1;
+        private TextBox txtUsername;
         private Label label1;
         private Label label2;
-        private TextBox textBox2;
+        private TextBox txtPassword;
         private Label label3;
+        private PictureBox pictureBox1;
+        private Button btnClose;
     }
 }
