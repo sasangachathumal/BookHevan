@@ -157,9 +157,11 @@
             // 
             txtPhoneNo.Font = new Font("Segoe UI", 12F);
             txtPhoneNo.Location = new Point(585, 50);
+            txtPhoneNo.MaxLength = 10;
             txtPhoneNo.Name = "txtPhoneNo";
             txtPhoneNo.Size = new Size(250, 29);
             txtPhoneNo.TabIndex = 13;
+            txtPhoneNo.KeyPress += txtPhoneNo_KeyPress;
             // 
             // btnClear
             // 
@@ -217,6 +219,7 @@
             txtName.Name = "txtName";
             txtName.Size = new Size(257, 29);
             txtName.TabIndex = 2;
+            txtName.KeyPress += txtName_KeyPress;
             // 
             // label2
             // 

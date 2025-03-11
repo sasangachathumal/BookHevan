@@ -40,12 +40,16 @@ namespace BookHevan.View
             viewRest();
         }
 
+        /**
+         * This method is used to reset the view
+         */
         private void viewRest()
         {
+            // Clear all the fields
             lblCustomerAddress.Text = string.Empty;
             lblCustomerEmail.Text = string.Empty;
             lblCustomerPhoneNo.Text = string.Empty;
-
+            // Get all the customers and add them to the combo box
             DataTable customerDT = Customer.getCustomersForDataTable();
             comCustomerSelect.Items.Clear();
             comCustomerSelect.Items.Add("--SELECT--");
@@ -54,18 +58,21 @@ namespace BookHevan.View
                 comCustomerSelect.Items.Add(Dr["name"]);
             }
             comCustomerSelect.SelectedIndex = 0;
-
+            // Clear the data grid views
             dgvOrderDetail.DataSource = null;
             dgvCustomerOrders.DataSource = null;
+            // Disable the buttons
             btnClearOrderDetailSelect.Enabled = false;
             btnDeleteOrderDetail.Enabled = false;
-            btnUpdateOrderDetail.Enabled = false;
+            // Clear the text fields
             txtDiscount.Text = string.Empty;
             txtNetAmount.Text = string.Empty;
             txtQuantity.Text = string.Empty;
             txtTotalAmount.Text = string.Empty;
+            // Reset the flags
             isUpdatingOrder = false;
             isUpdatingOrderDetails = false;
+            // Reset the selected objects
             selectedCustomer = new Customer();
             selectedOrder = new CustomerOrder();
             selectedOrderDetail = new CustomerOrderDetails();
@@ -75,23 +82,26 @@ namespace BookHevan.View
         {
             if (comCustomerSelect.SelectedIndex > 0)
             {
+                // Get the selected customer name
                 string selectedCustomerName = comCustomerSelect.SelectedItem.ToString();
 
                 if (!string.IsNullOrEmpty(selectedCustomerName))
                 {
+                    // Search for the customer by name
                     Customer searched = Customer.searchByName(selectedCustomerName);
                     if (searched?.id != null)
                     {
+                        // Set the customer details
                         lblCustomerEmail.Text = searched.email;
                         lblCustomerAddress.Text = searched.address;
                         lblCustomerPhoneNo.Text = searched.phoneNo;
-
+                        // Set the selected customer
                         selectedCustomer.id = searched.id;
                         selectedCustomer.address = searched.address;
                         selectedCustomer.email = searched.email;
                         selectedCustomer.phoneNo = searched.phoneNo;
                         selectedCustomer.name = searched.name;
-
+                        // Get the customer orders and add them to the data grid view
                         dgvCustomerOrders.DataSource = CustomerOrder.getOrdersByCustomerForDataTable(selectedCustomer.id);
                         dgvCustomerOrders.ClearSelection();
                     }
@@ -117,14 +127,15 @@ namespace BookHevan.View
                 else { selectedOrder.discount = 0; }
                 selectedOrder.noOfItems = int.Parse(row.Cells[4].Value.ToString());
                 selectedOrder.type = row.Cells[5].Value.ToString();
-
+                // Set the flags
                 isUpdatingOrder = true;
                 isUpdatingOrderDetails = false;
+                // Reset the selected order details
                 selectedOrderDetail = new CustomerOrderDetails();
-
+                // Get the order details and add them to the data grid view
                 dgvOrderDetail.DataSource = CustomerOrderDetails.getOrdersDetailsByOrderForDataTable(selectedOrder.id);
                 dgvOrderDetail.ClearSelection();
-
+                // Set the text fields
                 txtDiscount.Text = selectedOrder.discount.ToString();
                 txtNetAmount.Text = selectedOrder.amount.ToString();
                 txtTotalAmount.Text = (selectedOrder.amount + selectedOrder.discount).ToString();
@@ -142,14 +153,13 @@ namespace BookHevan.View
                 selectedOrderDetail.custOrderId = int.Parse(row.Cells[0].Value.ToString());
                 selectedOrderDetail.bookId = int.Parse(row.Cells[1].Value.ToString());
                 selectedOrderDetail.quantity = int.Parse(row.Cells[7].Value.ToString());
-
+                // Set the flags
                 isUpdatingOrderDetails = true;
-
+                // Set the text fields
                 txtQuantity.Text = selectedOrderDetail.quantity.ToString();
-                txtQuantity.Enabled = true;
+
                 btnClearOrderDetailSelect.Enabled = true;
                 btnDeleteOrderDetail.Enabled = true;
-                btnUpdateOrderDetail.Enabled = true;
             }
         }
 
@@ -160,45 +170,56 @@ namespace BookHevan.View
 
         private void btnClearOrderDetailSelect_Click(object sender, EventArgs e)
         {
+            // reset the text fields
             txtDiscount.Text = string.Empty;
             txtNetAmount.Text = string.Empty;
             txtTotalAmount.Text = string.Empty;
             txtQuantity.Text = string.Empty;
+            // reset the flags
             txtQuantity.Enabled = false;
+            // reset the selected order details
             dgvOrderDetail.ClearSelection();
+            // reset the buttons
             btnClearOrderDetailSelect.Enabled = false;
             btnDeleteOrderDetail.Enabled = false;
-            btnUpdateOrderDetail.Enabled = false;
+            // reset the selected order details
             selectedOrderDetail = new CustomerOrderDetails();
         }
 
         private void btnDeleteOrder_Click(object sender, EventArgs e)
         {
+            // Check if the user is updating an order
             if (!isUpdatingOrder)
             {
                 MessageBox.Show("Please select a order to delete", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            // Confirm the delete action
             DialogResult diaRes = MessageBox.Show("Are you sure, You want to Delete Customer Order " +
                 selectedOrder.id + " from the System? ", "Confirm to DELETE!",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            // Check the user response
             if (diaRes == DialogResult.Yes)
             {
+                // Delete the order
                 bool isSuccess = selectedOrder.delete();
                 if (isSuccess)
                 {
                     MessageBox.Show("Customer order successfully deleted.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Clear the text fields
                     txtDiscount.Text = string.Empty;
                     txtNetAmount.Text = string.Empty;
                     txtTotalAmount.Text = string.Empty;
                     txtQuantity.Text = string.Empty;
+                    // Disable the text field
                     txtQuantity.Enabled = false;
+                    // Clear the data grid views
                     dgvOrderDetail.DataSource = null;
                     dgvCustomerOrders.DataSource = CustomerOrder.getOrdersByCustomerForDataTable(selectedCustomer.id);
                     dgvCustomerOrders.ClearSelection();
+                    // Reset the buttons
                     btnClearOrderDetailSelect.Enabled = false;
                     btnDeleteOrderDetail.Enabled = false;
-                    btnUpdateOrderDetail.Enabled = false;
                 }
                 else
                 {
@@ -231,7 +252,6 @@ namespace BookHevan.View
                     dgvOrderDetail.ClearSelection();
                     btnClearOrderDetailSelect.Enabled = false;
                     btnDeleteOrderDetail.Enabled = false;
-                    btnUpdateOrderDetail.Enabled = false;
                 }
                 else
                 {
@@ -242,7 +262,9 @@ namespace BookHevan.View
 
         private void btnUpdateOrderDetail_Click(object sender, EventArgs e)
         {
+            // get the new quantity
             int newQuantity = int.Parse(txtQuantity.Text);
+            // check if the quantity is not changed
             if (newQuantity == selectedOrderDetail.quantity)
             {
                 MessageBox.Show("Quantity not changed to perform an update", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -276,7 +298,6 @@ namespace BookHevan.View
                         dgvOrderDetail.ClearSelection();
                         btnClearOrderDetailSelect.Enabled = false;
                         btnDeleteOrderDetail.Enabled = false;
-                        btnUpdateOrderDetail.Enabled = false;
                         MessageBox.Show("Order item quantity updated", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else

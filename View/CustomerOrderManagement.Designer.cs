@@ -46,7 +46,6 @@
             dgvCustomerOrders = new DataGridView();
             btnNewCustomerOrder = new Button();
             groupBox3 = new GroupBox();
-            btnUpdateOrderDetail = new Button();
             label9 = new Label();
             txtNetAmount = new TextBox();
             btnClearOrderDetailSelect = new Button();
@@ -284,7 +283,6 @@
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(btnUpdateOrderDetail);
             groupBox3.Controls.Add(label9);
             groupBox3.Controls.Add(txtNetAmount);
             groupBox3.Controls.Add(btnClearOrderDetailSelect);
@@ -302,25 +300,6 @@
             groupBox3.TabIndex = 19;
             groupBox3.TabStop = false;
             groupBox3.Text = "Customer Order Details";
-            // 
-            // btnUpdateOrderDetail
-            // 
-            btnUpdateOrderDetail.BackColor = Color.DarkOrange;
-            btnUpdateOrderDetail.Cursor = Cursors.Hand;
-            btnUpdateOrderDetail.Enabled = false;
-            btnUpdateOrderDetail.FlatAppearance.BorderColor = Color.DarkOrange;
-            btnUpdateOrderDetail.FlatAppearance.BorderSize = 0;
-            btnUpdateOrderDetail.FlatStyle = FlatStyle.Flat;
-            btnUpdateOrderDetail.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnUpdateOrderDetail.ForeColor = Color.White;
-            btnUpdateOrderDetail.Location = new Point(902, 249);
-            btnUpdateOrderDetail.Name = "btnUpdateOrderDetail";
-            btnUpdateOrderDetail.Size = new Size(93, 32);
-            btnUpdateOrderDetail.TabIndex = 31;
-            btnUpdateOrderDetail.Text = "Update";
-            btnUpdateOrderDetail.UseVisualStyleBackColor = false;
-            btnUpdateOrderDetail.Visible = false;
-            btnUpdateOrderDetail.Click += btnUpdateOrderDetail_Click;
             // 
             // label9
             // 
@@ -514,6 +493,5 @@
         private Button btnDeleteOrderDetail;
         private Label label9;
         private TextBox txtNetAmount;
-        private Button btnUpdateOrderDetail;
     }
 }

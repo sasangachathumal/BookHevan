@@ -143,6 +143,7 @@
             txtOrderQuantity.PlaceholderText = "Order quantity";
             txtOrderQuantity.Size = new Size(148, 29);
             txtOrderQuantity.TabIndex = 14;
+            txtOrderQuantity.KeyPress += txtOrderQuantity_KeyPress;
             // 
             // btnSupplierOrder
             // 
@@ -263,6 +264,7 @@
             txtISBN.Name = "txtISBN";
             txtISBN.Size = new Size(221, 29);
             txtISBN.TabIndex = 4;
+            txtISBN.KeyPress += txtISBN_KeyPress;
             // 
             // label4
             // 
@@ -291,6 +293,8 @@
             txtAuthor.Name = "txtAuthor";
             txtAuthor.Size = new Size(221, 29);
             txtAuthor.TabIndex = 2;
+            txtAuthor.TextChanged += txtAuthor_TextChanged;
+            txtAuthor.KeyPress += txtAuthor_KeyPress;
             // 
             // groupBox1
             // 
@@ -346,6 +350,7 @@
             txtStockQuantity.Name = "txtStockQuantity";
             txtStockQuantity.Size = new Size(221, 29);
             txtStockQuantity.TabIndex = 6;
+            txtStockQuantity.KeyPress += txtStockQuantity_KeyPress;
             // 
             // label7
             // 
@@ -364,6 +369,7 @@
             txtGenre.Name = "txtGenre";
             txtGenre.Size = new Size(221, 29);
             txtGenre.TabIndex = 3;
+            txtGenre.KeyPress += txtGenre_KeyPress;
             // 
             // label6
             // 
@@ -382,6 +388,7 @@
             txtPrice.Name = "txtPrice";
             txtPrice.Size = new Size(221, 29);
             txtPrice.TabIndex = 5;
+            txtPrice.KeyPress += txtPrice_KeyPress;
             // 
             // label1
             // 

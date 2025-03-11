@@ -223,6 +223,7 @@
             button1.TabIndex = 29;
             button1.Text = "Sales Reports";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // btnLogout
             // 

@@ -86,6 +86,12 @@ namespace BookHevan.View
             string phoneNo = txtPhoneNo.Text;
             string address = txtAddress.Text;
 
+            if (!string.IsNullOrEmpty(email) && !FieldValidations.isEmailValid(email))
+            {
+                MessageBox.Show("Please provide a valid email address", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(email) &&
                 !string.IsNullOrEmpty(phoneNo) && !string.IsNullOrEmpty(address))
             {
@@ -175,10 +181,7 @@ namespace BookHevan.View
             searchSupplier();
         }
 
-        private void txtSearchWord_KeyDown(object sender, KeyEventArgs e)
-        {
-            //searchSupplier();
-        }
+        private void txtSearchWord_KeyDown(object sender, KeyEventArgs e){}
 
         private void txtSearchWord_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -188,6 +191,24 @@ namespace BookHevan.View
         private void btnHome_Click(object sender, EventArgs e)
         {
             UserNavigation.navigateToDashboard(this);
+        }
+
+        private void txtPhoneNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow only digits (0-9) and control characters (like backspace)
+            if (FieldValidations.isAllDigits(e))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow only English letters (both upper and lower case) and control characters (like backspace)
+            if (FieldValidations.isAllLetters(e))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -33,7 +33,6 @@ namespace BookHevan.Model
             this.phoneNo = phoneNo;
             this.type = type;
         }
-
         public User(string fullName, string username, string password, string phoneNo, string type)
         {
             this.fullName = fullName;
@@ -42,23 +41,19 @@ namespace BookHevan.Model
             this.phoneNo = phoneNo;
             this.type = type;
         }
-
         public User(string username, string password)
         {
             this.username = username;
             this.password = password;
         }
-
         public User(int id)
         {
             this.id = id;
         }
-
         public User(string username)
         {
             this.username = username;
         }
-
         public User() { }
 
         /*
@@ -271,10 +266,10 @@ namespace BookHevan.Model
         }
 
         /*
-         * This method will search user by the email in the database and return a user object with data if user found.
+         * This method will search user by the username in the database and return a user object with data if user found.
          * @return
          *  - user object with data: if user succesfuly found in DB.
-         *  - user object without data: if update search had any issues or user email not provided.
+         *  - user object without data: if update search had any issues or username not provided.
         */
         public static User searchByUsername(string username)
         {
@@ -356,6 +351,7 @@ namespace BookHevan.Model
 
         /*
          * This method return a data table object with users based on provided username.
+         * search will be based on LIKE operator on username.
          * @return
          *  - data table object with data: if users succesfuly found in DB.
          *  - data table object without data: if had any issues or users not available.

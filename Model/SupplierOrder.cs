@@ -32,7 +32,7 @@ namespace BookHevan.Model
         public SupplierOrder() { }
 
         /*
-         * This method will save a new customer order data in the database and return a boolean based of result.
+         * This method will save a new supplier order data in the database and return a boolean based of result.
          * @return
          *  - true: if order succesfuly saved in DB.
          *  - false: if save process had any issues or order data not provided.
@@ -100,10 +100,10 @@ namespace BookHevan.Model
         }
 
         /*
-         * This method will delete the customer order data in the database and return a boolean based of result.
+         * This method will delete the supplier order data in the database and return a boolean based of result.
          * @return
-         *  - true: if customer order succesfuly deleted in DB.
-         *  - false: if delete process had any issues or customer order id not provided.
+         *  - true: if supplier order succesfuly deleted in DB.
+         *  - false: if delete process had any issues or supplier order id not provided.
         */
         public bool delete()
         {
@@ -143,10 +143,10 @@ namespace BookHevan.Model
         }
 
         /*
-         * This method will search customer order by the id in the database.
+         * This method will search supplier order by the id in the database by supplier order id.
          * @return
-         *  - customer order object with data: if customer order succesfuly found in DB.
-         *  - customer order object without data: if customer order succesfuly not found in DB.
+         *  - supplier order object with data: if supplier order succesfuly found in DB.
+         *  - supplier order object without data: if supplier order succesfuly not found in DB.
         */
         public static SupplierOrder searchById(int orderID)
         {
@@ -194,10 +194,10 @@ namespace BookHevan.Model
         }
 
         /*
-         * This method return a data table object with suppliers.
+         * This method return a data table object with supplier orders.
          * @return
          *  - data table object with data: if user succesfuly found in DB.
-         *  - data table object without data: if had any issues or suppliers not available.
+         *  - data table object without data: if had any issues or supplier order not available.
         */
         public static DataTable getForDataTable()
         {
@@ -227,7 +227,7 @@ namespace BookHevan.Model
         }
 
         /*
-         * This method return a data table object with suppliers based on provided title.
+         * This method return a data table object with suppliers based on provided supplier id.
          * @return
          *  - data table object with data: if suppliers succesfuly found in DB.
          *  - data table object without data: if had any issues or suppliers not available.

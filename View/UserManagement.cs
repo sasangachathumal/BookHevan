@@ -227,5 +227,32 @@ namespace BookHevan.View
         {
             UserNavigation.navigateToDashboard(this);
         }
+
+        private void txtFullName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow only English letters (both upper and lower case) and control characters (like backspace)
+            if (FieldValidations.isAllLetters(e))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtUsername_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow only English letters (both upper and lower case) and control characters (like backspace)
+            if (FieldValidations.isAllLetters(e))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPhoneNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow only digits (0-9) and control characters (like backspace)
+            if (FieldValidations.isAllDigits(e))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

@@ -135,6 +135,7 @@
             txtDiscount.Size = new Size(219, 29);
             txtDiscount.TabIndex = 20;
             txtDiscount.KeyDown += txtDiscount_KeyDown;
+            txtDiscount.KeyPress += txtDiscount_KeyPress;
             // 
             // label10
             // 
@@ -148,6 +149,7 @@
             // 
             // txtTotalAmount
             // 
+            txtTotalAmount.Enabled = false;
             txtTotalAmount.Font = new Font("Segoe UI", 12F);
             txtTotalAmount.Location = new Point(902, 45);
             txtTotalAmount.Name = "txtTotalAmount";
@@ -263,6 +265,7 @@
             txtQuantity.Name = "txtQuantity";
             txtQuantity.Size = new Size(219, 29);
             txtQuantity.TabIndex = 14;
+            txtQuantity.KeyPress += txtQuantity_KeyPress;
             // 
             // btnAdd
             // 

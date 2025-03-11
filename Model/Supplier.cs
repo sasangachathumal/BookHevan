@@ -28,7 +28,6 @@ namespace BookHevan.Model
             this.phoneNo = phoneNo;
             this.address = address;
         }
-
         public Supplier(string name, string email, string phoneNo, string address)
         {
             this.name = name;
@@ -36,12 +35,10 @@ namespace BookHevan.Model
             this.phoneNo = phoneNo;
             this.address = address;
         }
-
         public Supplier(int id)
         {
             this.id = id;
         }
-
         public Supplier() { }
 
         /*
@@ -236,6 +233,12 @@ namespace BookHevan.Model
             }
         }
 
+        /*
+         * This method will search supplier by the name in the database and return a supplier object with data if supplier found.
+         * @return
+         *  - supplier object with data: if supplier succesfuly found in DB.
+         *  - supplier object without data: if update search had any issues or supplier name not provided.
+        */
         public static Supplier searchByName(string supplierName)
         {
             Supplier supplier = new Supplier();
@@ -314,7 +317,8 @@ namespace BookHevan.Model
         }
 
         /*
-         * This method return a data table object with suppliers based on provided title.
+         * This method return a data table object with suppliers based on provided name.
+         * search will be based on like query on name.
          * @return
          *  - data table object with data: if suppliers succesfuly found in DB.
          *  - data table object without data: if had any issues or suppliers not available.

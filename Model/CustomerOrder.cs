@@ -37,7 +37,6 @@ namespace BookHevan.Model
             this.noOfItems = noOfItems;
             this.discount = discount;
         }
-
         public CustomerOrder(int customerId, int userId, string date, decimal amount, string type, int noOfItems, int discount)
         {
             this.customerId = customerId;
@@ -48,14 +47,11 @@ namespace BookHevan.Model
             this.discount = discount;
             this.noOfItems = noOfItems;
         }
-
         public CustomerOrder(int id)
         {
             this.id = id;
         }
-
         public CustomerOrder() { }
-
 
         /*
          * This method will save a new customer order data in the database and return a boolean based of result.
@@ -274,43 +270,10 @@ namespace BookHevan.Model
         }
 
         /*
-         * This method return a data table object with suppliers.
+         * This method return a data table object with customer order based on provided customer id.
          * @return
-         *  - data table object with data: if user succesfuly found in DB.
-         *  - data table object without data: if had any issues or suppliers not available.
-        */
-        public static DataTable getSupplierForDataTable()
-        {
-            DataTable dataTable = new DataTable();
-
-            try
-            {
-                connection.Open();
-                string query = "SELECT id as 'Supplier ID', name, email, phoneNo, address FROM supplier";
-
-                using (MySqlCommand cmd = new MySqlCommand(query, connection))
-                {
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        dataTable.Load(reader);
-                        connection.Close();
-                        return dataTable;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-                connection.Close();
-                return dataTable;
-            }
-        }
-
-        /*
-         * This method return a data table object with suppliers based on provided title.
-         * @return
-         *  - data table object with data: if suppliers succesfuly found in DB.
-         *  - data table object without data: if had any issues or suppliers not available.
+         *  - data table object with data: if customer order succesfuly found in DB.
+         *  - data table object without data: if had any issues or customer id not available.
         */
         public static DataTable getOrdersByCustomerForDataTable(int customerId)
         {

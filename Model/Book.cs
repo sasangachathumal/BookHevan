@@ -35,7 +35,6 @@ namespace BookHevan.Model
             this.quantity = quantity;
             this.supplier = supplier;
         }
-
         public Book(string title, string author, string genre, string isbn, decimal price, int quantity)
         {
             this.title = title;
@@ -45,22 +44,21 @@ namespace BookHevan.Model
             this.price = price;
             this.quantity = quantity;
         }
-
         public Book(int id)
         {
             this.id = id;
         }
-
         public Book() { }
 
         /*
-         * This method will save the book data in the database and return a boolean based of result.
+         * This method will create the book data in the database and return a boolean based of result.
          * @return
-         *  - true: if book succesfuly saved in DB.
-         *  - false: if save process had any issues or book data not provided.
+         *  - true: if book succesfuly created in DB.
+         *  - false: if create process had any issues or book data not provided.
         */
         public bool create()
         {
+            // Check if book data is provided
             if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(author) || string.IsNullOrEmpty(isbn) ||
                 string.IsNullOrEmpty(genre) || !decimal.IsPositive(price) || !int.IsPositive(quantity) ||
                 string.IsNullOrEmpty(supplier))
@@ -69,12 +67,15 @@ namespace BookHevan.Model
             }
             try
             {
+                // Open connection
                 connection.Open();
+                // Query to insert book data
                 string query = "INSERT INTO book (supplier, title, author, genre, isbn, price, quantity)" +
                     " VALUES (@supplier, @title, @author, @genre, @isbn, @price, @quantity)";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
+                    // Add parameters to the query
                     cmd.Parameters.AddWithValue("@supplier", supplier);
                     cmd.Parameters.AddWithValue("@title", title);
                     cmd.Parameters.AddWithValue("@author", author);
@@ -227,13 +228,13 @@ namespace BookHevan.Model
                         {
 
                             book.id = reader.GetInt32(0);
-                            book.title = reader.GetString(1);
-                            book.author = reader.GetString(2);
-                            book.genre = reader.GetString(3);
-                            book.isbn = reader.GetString(4);
-                            book.price = reader.GetDecimal(5);
-                            book.quantity = reader.GetInt32(6);
-                            book.supplier = reader.GetString(7);
+                            book.supplier = reader.GetString(1);
+                            book.title = reader.GetString(2);
+                            book.author = reader.GetString(3);
+                            book.genre = reader.GetString(4);
+                            book.isbn = reader.GetString(5);
+                            book.price = reader.GetDecimal(6);
+                            book.quantity = reader.GetInt32(7);
                             connection.Close();
                             return book;
                         }
@@ -256,7 +257,7 @@ namespace BookHevan.Model
         /*
          * This method return a data table object with books.
          * @return
-         *  - data table object with data: if user succesfuly found in DB.
+         *  - data table object with data: if book succesfuly found in DB.
          *  - data table object without data: if had any issues or books not available.
         */
         public static DataTable getBooksForDataTable()
@@ -287,7 +288,10 @@ namespace BookHevan.Model
         }
 
         /*
-         * This method return a data table object with books based on provided title.
+         * This method return a data table object with books based on the provided title.
+         * @return
+         *  - data table object with data: if book succesfuly found in DB.
+         *  - data table object without data: if had any issues or books not available.
         */
         public static DataTable searchByTitleForDataTable(string title)
         {
@@ -321,6 +325,12 @@ namespace BookHevan.Model
             }
         }
 
+        /*
+         * This method return a data table object with books based on the provided title.
+         * @return
+         *  - data table object with data: if book succesfuly found in DB.
+         *  - data table object without data: if had any issues or books not available.
+        */
         public static DataTable filterByTitle(string title)
         {
             DataTable dataTable = new DataTable();
@@ -353,6 +363,12 @@ namespace BookHevan.Model
             }
         }
 
+        /*
+         * This method return a data table object with books based on the provided author.
+         * @return
+         *  - data table object with data: if book succesfuly found in DB.
+         *  - data table object without data: if had any issues or books not available.
+        */
         public static DataTable filterByAuthor(string author)
         {
             DataTable dataTable = new DataTable();
@@ -385,6 +401,12 @@ namespace BookHevan.Model
             }
         }
 
+        /*
+         * This method return a data table object with books based on the provided genre.
+         * @return
+         *  - data table object with data: if book succesfuly found in DB.
+         *  - data table object without data: if had any issues or books not available.
+        */
         public static DataTable filterByGenre(string genre)
         {
             DataTable dataTable = new DataTable();
@@ -417,6 +439,12 @@ namespace BookHevan.Model
             }
         }
 
+        /*
+         * This method update quantity of book base on provided book id and quantity.
+         * @return
+         *  - true: if book succesfuly updates.
+         *  - false: if had any issues.
+        */
         public static bool updateQuantity(int id, int quantity)
         {
             if (!int.IsPositive(id) || !int.IsPositive(quantity))
@@ -457,6 +485,13 @@ namespace BookHevan.Model
             }
         }
 
+        /*
+         * This method return a data table object with books based on the provided keyword.
+         * search happen on title and isbn.
+         * @return
+         *  - data table object with data: if book succesfuly found in DB.
+         *  - data table object without data: if had any issues or books not available.
+        */
         public static DataTable searchByKeywordForDataTable(string searchWord)
         {
             DataTable dataTable = new DataTable();

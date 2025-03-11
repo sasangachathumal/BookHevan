@@ -147,6 +147,7 @@
             txtQuantity.Name = "txtQuantity";
             txtQuantity.Size = new Size(219, 29);
             txtQuantity.TabIndex = 14;
+            txtQuantity.KeyPress += txtQuantity_KeyPress;
             // 
             // btnAddBookToOrder
             // 
@@ -275,6 +276,7 @@
             txtDiscount.Size = new Size(219, 29);
             txtDiscount.TabIndex = 20;
             txtDiscount.KeyDown += txtDiscount_KeyDown;
+            txtDiscount.KeyPress += txtDiscount_KeyPress;
             // 
             // label10
             // 
@@ -341,6 +343,7 @@
             txtPhoneNo.TabIndex = 26;
             txtPhoneNo.TextChanged += txtPhoneNo_TextChanged;
             txtPhoneNo.KeyDown += txtPhoneNo_KeyDown;
+            txtPhoneNo.KeyPress += txtPhoneNo_KeyPress;
             // 
             // btnNewCustomer
             // 

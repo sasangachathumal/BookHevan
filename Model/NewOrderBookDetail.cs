@@ -7,6 +7,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace BookHevan.Model
 {
+    // This class is used to store the details of a new order book.
     internal class NewOrderBookDetail
     {
         public int id { get; set; }

@@ -14,17 +14,19 @@ namespace BookHevan
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            // Check if username and password is empty
             if (string.IsNullOrEmpty(txtUsername.Text) || string.IsNullOrEmpty(txtPassword.Text))
             {
                 MessageBox.Show("Username and Password is required", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            // Login user
             Form redirect = UserAuth.Login(new User
             {
                 username = txtUsername.Text,
                 password = txtPassword.Text
             });
+            // Redirect to dashboard based on user type
             if (redirect != null)
             {
                 redirect.Show();

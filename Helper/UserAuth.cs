@@ -10,17 +10,26 @@ namespace BookHevan.Helper
 {
     internal class UserAuth
     {
+        /**
+         * Login user
+         * @param user
+         * @return Form: AdminDashboard or StaffDashboard based on user type
+         */
         public static Form? Login(User user)
         {
             if (user.username != null && user.password != null)
             {
+                // Search user by username
                 User searchUser = User.searchByUsername(user.username);
                 if (searchUser.id != 0 && searchUser.password != null)
                 {
+                    // Verify password
                     bool isVerify = PasswordSecurity.VerifyPassword(user.username, searchUser.password);
                     if (isVerify)
                     {
+                        // Set user session
                         UserSession.SetUser(searchUser.id, searchUser.username, searchUser.fullName, searchUser.phoneNo, searchUser.type);
+                        // Redirect to dashboard based on user type
                         if (searchUser.type == "Admin")
                         {
                             return new AdminDashboard();

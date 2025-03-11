@@ -36,12 +36,10 @@ namespace BookHevan.Model
             this.phoneNo = phoneNo;
             this.address = address;
         }
-
         public Customer(int id)
         {
             this.id = id;
         }
-
         public Customer() { }
 
         /*
@@ -235,6 +233,12 @@ namespace BookHevan.Model
             }
         }
 
+        /*
+         * This method will search customer by the name in the database and return a customer object with data if customer found.
+         * @return
+         *  - customer object with data: if customer succesfuly found in DB.
+         *  - customer object without data: if update search had any issues or customer name not provided.
+        */
         public static Customer searchByName(string name)
         {
             Customer customer = new Customer();
@@ -314,6 +318,7 @@ namespace BookHevan.Model
 
         /*
          * This method return a data table object with customers based on provided name.
+         * search will be based on like query on name.
          * @return
          *  - data table object with data: if customers succesfuly found in DB.
          *  - data table object without data: if had any issues or customers not available.
@@ -349,6 +354,12 @@ namespace BookHevan.Model
             }
         }
 
+        /*
+         * This method return a data table object with customers based on provided phone number.
+         * @return
+         *  - data table object with data: if customers succesfuly found in DB.
+         *  - data table object without data: if had any issues or customers not available.
+        */
         public static Customer searchByPhoneNo(string phoneNo)
         {
             Customer customer = new Customer();

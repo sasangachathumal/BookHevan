@@ -128,6 +128,7 @@
             txtName.Name = "txtName";
             txtName.Size = new Size(268, 29);
             txtName.TabIndex = 2;
+            txtName.KeyPress += txtName_KeyPress;
             // 
             // label2
             // 
@@ -143,9 +144,11 @@
             // 
             txtPhoneNo.Font = new Font("Segoe UI", 12F);
             txtPhoneNo.Location = new Point(595, 50);
+            txtPhoneNo.MaxLength = 10;
             txtPhoneNo.Name = "txtPhoneNo";
             txtPhoneNo.Size = new Size(268, 29);
             txtPhoneNo.TabIndex = 13;
+            txtPhoneNo.KeyPress += txtPhoneNo_KeyPress;
             // 
             // groupBox1
             // 

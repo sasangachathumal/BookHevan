@@ -28,8 +28,12 @@ namespace BookHevan.View
             Application.Exit();
         }
 
+        /**
+         * This method is used to reset the view to the initial state
+         * */
         private void viewRest()
         {
+            // Clear all the text fields
             txtAuthor.Clear();
             txtGenre.Clear();
             txtTitle.Clear();
@@ -37,16 +41,35 @@ namespace BookHevan.View
             txtISBN.Clear();
             txtStockQuantity.Clear();
             txtSearchWord.Clear();
-
+            // Load the data grid view with the books
             dgvBooks.DataSource = Book.getBooksForDataTable();
             dgvBooks.ClearSelection();
-
+            // Set the button text to Save
             btnSave.Text = "Save";
+            // Set the isUpdating flag to false
             isUpdating = false;
+            // Create a new book object
             selectedBook = new Book();
-
+            // Set focus to the title text field
             txtTitle.Focus();
+            // Disable the order quantity text field and the supplier order button
+            txtOrderQuantity.Enabled = false;
+            btnSupplierOrder.Enabled = false;
+            // Ensure order quantity text field and the supplier order button only visible to Admin
+            if (UserSession.type != "Admin")
+            {
+                txtOrderQuantity.Visible = false;
+                btnSupplierOrder.Visible = false;
+            }
+            // Load the supplier combo box
+            loadComboBox();
+        }
 
+        /**
+         * This method is used to load the supplier combo box
+         * */
+        private void loadComboBox()
+        {
             DataTable supplierDT = Supplier.getSupplierForDataTable();
             comSupplier.Items.Clear();
             comSupplier.Items.Add("--SELECT--");
@@ -55,19 +78,11 @@ namespace BookHevan.View
                 comSupplier.Items.Add(Dr["name"]);
             }
             comSupplier.SelectedIndex = 0;
-
-            txtOrderQuantity.Enabled = false;
-            btnSupplierOrder.Enabled = false;
-
-            if (UserSession.type != "Admin")
-            {
-                txtOrderQuantity.Visible = false;
-                btnSupplierOrder.Visible = false;
-            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            // Get the values from the text fields
             string title = txtTitle.Text;
             string author = txtAuthor.Text;
             string genre = txtGenre.Text;
@@ -76,12 +91,15 @@ namespace BookHevan.View
             int quantity;
             bool isSuccess = false;
 
+            // Check if all the fields are filled
             if (!string.IsNullOrEmpty(title) && !string.IsNullOrEmpty(author) &&
                 !string.IsNullOrEmpty(genre) && !string.IsNullOrEmpty(isbn) &&
                 decimal.TryParse(txtPrice.Text, out price) && int.TryParse(txtStockQuantity.Text, out quantity) &&
                 selectedSupplier.id > 0)
             {
+                // Create a new book object
                 Book book = new Book();
+                // Set the values to the book object
                 book.author = author;
                 book.genre = genre;
                 book.isbn = isbn;
@@ -89,9 +107,12 @@ namespace BookHevan.View
                 book.quantity = quantity;
                 book.title = title;
 
+                // Check if the operation is an update
                 if (isUpdating)
                 {
+                    // Set the book id
                     book.id = selectedBook.id;
+                    // Update the book
                     isSuccess = book.update();
                     if (isSuccess)
                     {
@@ -105,6 +126,9 @@ namespace BookHevan.View
                 }
                 else
                 {
+                    // Set the supplier name
+                    book.supplier = selectedSupplier.name;
+                    // Create the book
                     isSuccess = book.create();
                     if (isSuccess)
                     {
@@ -145,6 +169,7 @@ namespace BookHevan.View
                 selectedBook.quantity = int.Parse(row.Cells[6].Value.ToString());
                 selectedBook.supplier = row.Cells[7].Value.ToString();
 
+                // Set the values to the text fields
                 txtTitle.Text = selectedBook.title;
                 txtAuthor.Text = selectedBook.author;
                 txtGenre.Text = selectedBook.genre;
@@ -155,8 +180,13 @@ namespace BookHevan.View
 
                 btnSave.Text = "Update";
                 isUpdating = true;
-                txtOrderQuantity.Enabled = true;
-                btnSupplierOrder.Enabled = true;
+
+                // Ensure order quantity text field and the supplier order button only visible to Admin
+                if (UserSession.type != "Admin")
+                {
+                    txtOrderQuantity.Visible = false;
+                    btnSupplierOrder.Visible = false;
+                }
             }
         }
 
@@ -167,16 +197,20 @@ namespace BookHevan.View
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            // Check if the user is updating a book
             if (!isUpdating)
             {
                 MessageBox.Show("Please select a book to delete", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            // Confirm the delete operation
             DialogResult diaRes = MessageBox.Show("Are you sure, You want to Delete Book " +
                 selectedBook.title + " from the System? ", "Confirm to DELETE!",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            // Check if the user confirmed the delete operation
             if (diaRes == DialogResult.Yes)
             {
+                // Delete the book
                 bool isSuccess = selectedBook.delete();
                 if (isSuccess)
                 {
@@ -190,17 +224,22 @@ namespace BookHevan.View
             }
         }
 
+        /**
+         * This method is used to search books by title
+         * */
         private void searchBooks()
         {
+            // Get the search word
             string searchWord = txtSearchWord.Text;
-
+            // Check if the search word is empty
             if (string.IsNullOrEmpty(searchWord))
             {
+                // Load all the books if no search word is provided
                 dgvBooks.DataSource = Book.getBooksForDataTable();
                 dgvBooks.ClearSelection();
                 return;
             }
-
+            // Search the books by title and load the data grid view
             dgvBooks.DataSource = Book.searchByTitleForDataTable(searchWord);
             dgvBooks.ClearSelection();
         }
@@ -212,13 +251,18 @@ namespace BookHevan.View
 
         private void txtSearchWord_KeyPress(object sender, KeyPressEventArgs e)
         {
-            searchBooks();
+            // Allow only English letters (both upper and lower case) and control characters (like backspace)
+            if (!Char.IsLetter(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                searchBooks();
+            }
         }
 
-        private void txtSearchWord_KeyDown(object sender, KeyEventArgs e)
-        {
-            searchBooks();
-        }
+        private void txtSearchWord_KeyDown(object sender, KeyEventArgs e){}
 
         private void btnHome_Click(object sender, EventArgs e)
         {
@@ -227,15 +271,19 @@ namespace BookHevan.View
 
         private void comSupplier_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Get the selected supplier
             if (comSupplier.SelectedIndex > 0)
             {
+                // Get the selected supplier name
                 string selectedSupplierName = comSupplier.SelectedItem.ToString();
 
                 if (!string.IsNullOrEmpty(selectedSupplierName))
                 {
+                    // Search the supplier by name
                     Supplier searched = Supplier.searchByName(selectedSupplierName);
                     if (searched?.id != null)
                     {
+                        // Set the selected supplier
                         selectedSupplier = searched;
                     }
                 }
@@ -244,31 +292,38 @@ namespace BookHevan.View
 
         private void btnSupplierOrder_Click(object sender, EventArgs e)
         {
+            // Check if the user is updating a book
             if (!isUpdating)
             {
                 MessageBox.Show("Please select a book to place order", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            // Check if the supplier is selected
             if (comSupplier.SelectedIndex > 0)
             {
                 string selectedSupplierName = comSupplier.SelectedItem.ToString();
                 if (!string.IsNullOrEmpty(selectedSupplierName))
                 {
+                    // Search the supplier by name
                     Supplier searched = Supplier.searchByName(selectedSupplierName);
                     if (searched?.id > 0)
                     {
+                        // Create a new supplier order object
                         SupplierOrder newSupplierOrder = new SupplierOrder();
+                        // Set the values to the supplier order object
                         newSupplierOrder.supplierId = searched.id;
                         newSupplierOrder.bookId = selectedBook.id;
                         newSupplierOrder.quantity = int.Parse(txtOrderQuantity.Text);
                         newSupplierOrder.userId = UserSession.id;
                         newSupplierOrder.date = DateTime.Now.ToString("yyyy-MM-dd");
 
+                        // Create the supplier order
                         SupplierOrder savedOrder = newSupplierOrder.create();
                         if (savedOrder?.id > 0)
                         {
-
+                            // Update the book quantity
                             selectedBook.quantity += newSupplierOrder.quantity;
+                            // Update the book
                             bool isSuccess = selectedBook.update();
                             if (isSuccess)
                             {
@@ -296,6 +351,62 @@ namespace BookHevan.View
                     MessageBox.Show("Please select a supplier to place order", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+            }
+        }
+
+        private void txtAuthor_TextChanged(object sender, EventArgs e) { }
+
+        private void txtAuthor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow only English letters (both upper and lower case) and control characters (like backspace)
+            if (FieldValidations.isAllLetters(e))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtGenre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow only English letters (both upper and lower case) and control characters (like backspace)
+            if (FieldValidations.isAllLetters(e))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtISBN_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow only digits (0-9) and control characters (like backspace)
+            if (FieldValidations.isAllDigits(e))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow only digits (0-9) and control characters (like backspace)
+            if (FieldValidations.isAllDigits(e))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtStockQuantity_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow only digits (0-9) and control characters (like backspace)
+            if (FieldValidations.isAllDigits(e))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtOrderQuantity_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow only digits (0-9) and control characters (like backspace)
+            if (FieldValidations.isAllDigits(e))
+            {
+                e.Handled = true;
             }
         }
     }

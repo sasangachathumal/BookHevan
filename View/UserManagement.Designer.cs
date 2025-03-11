@@ -94,6 +94,7 @@
             txtFullName.Name = "txtFullName";
             txtFullName.Size = new Size(226, 29);
             txtFullName.TabIndex = 1;
+            txtFullName.KeyPress += txtFullName_KeyPress;
             // 
             // label2
             // 
@@ -122,6 +123,7 @@
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(221, 29);
             txtUsername.TabIndex = 2;
+            txtUsername.KeyPress += txtUsername_KeyPress;
             // 
             // label4
             // 
@@ -137,6 +139,7 @@
             // 
             txtPassword.Font = new Font("Segoe UI", 12F);
             txtPassword.Location = new Point(505, 50);
+            txtPassword.MaxLength = 8;
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '.';
             txtPassword.Size = new Size(214, 29);
@@ -156,9 +159,11 @@
             // 
             txtPhoneNo.Font = new Font("Segoe UI", 12F);
             txtPhoneNo.Location = new Point(758, 50);
+            txtPhoneNo.MaxLength = 10;
             txtPhoneNo.Name = "txtPhoneNo";
             txtPhoneNo.Size = new Size(196, 29);
             txtPhoneNo.TabIndex = 4;
+            txtPhoneNo.KeyPress += txtPhoneNo_KeyPress;
             // 
             // groupBox1
             // 
