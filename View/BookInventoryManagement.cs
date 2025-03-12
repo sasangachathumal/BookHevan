@@ -106,6 +106,7 @@ namespace BookHevan.View
                 book.price = price;
                 book.quantity = quantity;
                 book.title = title;
+                book.supplier = selectedSupplier.name;
 
                 // Check if the operation is an update
                 if (isUpdating)
@@ -126,8 +127,6 @@ namespace BookHevan.View
                 }
                 else
                 {
-                    // Set the supplier name
-                    book.supplier = selectedSupplier.name;
                     // Create the book
                     isSuccess = book.create();
                     if (isSuccess)
@@ -186,6 +185,11 @@ namespace BookHevan.View
                 {
                     txtOrderQuantity.Visible = false;
                     btnSupplierOrder.Visible = false;
+                }
+                if (UserSession.type == "Admin")
+                {
+                    txtOrderQuantity.Enabled = true;
+                    btnSupplierOrder.Enabled = true;
                 }
             }
         }

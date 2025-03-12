@@ -1,4 +1,5 @@
 ﻿using BookHevan.Helper;
+using BookHevan.Model;
 using BookHevan.View;
 using System;
 using System.Collections.Generic;
@@ -77,6 +78,21 @@ namespace BookHevan
         {
             new SalesReports().Show();
             this.Hide();
+        }
+
+        private void AdminDashboard_Load(object sender, EventArgs e)
+        {
+            dgvInventoty.DataSource = SalesReportsModel.getSalesReportInventoryStatus();
+            dgvInventoty.ClearSelection();
+
+            string counts = SalesReportsModel.getSalesCounts();
+            if (!string.IsNullOrEmpty(counts))
+            {
+                string[] results = counts.Split(',');
+                lblTotalSales.Text = results[0];
+                lblTotalOrders.Text = results[1];
+            }
+
         }
     }
 }

@@ -261,5 +261,73 @@ namespace BookHevan.Model
                 return dataTable;
             }
         }
+
+        public static string getSalesCounts()
+        {
+            try
+            {
+                connection.Open();
+                string query = "SELECT SUM(amount) AS total_sales, COUNT(id) AS total_orders" +
+                    " FROM CustomerOrder;";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            string result = $"{reader.GetDecimal(0)}, {reader.GetInt32(1)}";
+                            connection.Close();
+                            return result;
+                        }
+                        else
+                        {
+                            connection.Close();
+                            return "";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                connection.Close();
+                return "";
+            }
+        }
+
+        public static string getCustomerCounts()
+        {
+            try
+            {
+                connection.Open();
+                string query = "SELECT COUNT(id) AS total_Customers" +
+                    " FROM customer;";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            string result = $"{reader.GetInt32(0)}";
+                            connection.Close();
+                            return result;
+                        }
+                        else
+                        {
+                            connection.Close();
+                            return "";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                connection.Close();
+                return "";
+            }
+        }
     }
 }

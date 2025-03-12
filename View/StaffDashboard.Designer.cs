@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            groupBox3 = new GroupBox();
-            groupBox2 = new GroupBox();
-            groupBox1 = new GroupBox();
             btnCustomerOrder = new Button();
             btnCustomerManagement = new Button();
             btnPOS = new Button();
@@ -40,33 +37,6 @@
             btnLogout = new Button();
             SuspendLayout();
             // 
-            // groupBox3
-            // 
-            groupBox3.Location = new Point(487, 172);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(456, 300);
-            groupBox3.TabIndex = 40;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "groupBox3";
-            // 
-            // groupBox2
-            // 
-            groupBox2.Location = new Point(12, 325);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(456, 147);
-            groupBox2.TabIndex = 41;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "groupBox2";
-            // 
-            // groupBox1
-            // 
-            groupBox1.Location = new Point(12, 172);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(456, 147);
-            groupBox1.TabIndex = 39;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "groupBox1";
-            // 
             // btnCustomerOrder
             // 
             btnCustomerOrder.BackColor = Color.DarkOrange;
@@ -75,7 +45,7 @@
             btnCustomerOrder.FlatStyle = FlatStyle.Flat;
             btnCustomerOrder.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnCustomerOrder.ForeColor = Color.White;
-            btnCustomerOrder.Location = new Point(490, 98);
+            btnCustomerOrder.Location = new Point(13, 172);
             btnCustomerOrder.Name = "btnCustomerOrder";
             btnCustomerOrder.Size = new Size(218, 44);
             btnCustomerOrder.TabIndex = 35;
@@ -91,7 +61,7 @@
             btnCustomerManagement.FlatStyle = FlatStyle.Flat;
             btnCustomerManagement.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnCustomerManagement.ForeColor = Color.White;
-            btnCustomerManagement.Location = new Point(726, 98);
+            btnCustomerManagement.Location = new Point(249, 172);
             btnCustomerManagement.Name = "btnCustomerManagement";
             btnCustomerManagement.Size = new Size(218, 44);
             btnCustomerManagement.TabIndex = 34;
@@ -139,7 +109,7 @@
             btnClose.FlatStyle = FlatStyle.Flat;
             btnClose.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnClose.ForeColor = Color.White;
-            btnClose.Location = new Point(916, 9);
+            btnClose.Location = new Point(441, 9);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(28, 24);
             btnClose.TabIndex = 32;
@@ -151,7 +121,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
-            label1.Location = new Point(324, 9);
+            label1.Location = new Point(70, 9);
             label1.Name = "label1";
             label1.Size = new Size(354, 45);
             label1.TabIndex = 31;
@@ -165,7 +135,7 @@
             btnLogout.FlatStyle = FlatStyle.Flat;
             btnLogout.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnLogout.ForeColor = Color.White;
-            btnLogout.Location = new Point(13, 9);
+            btnLogout.Location = new Point(13, 237);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(86, 32);
             btnLogout.TabIndex = 42;
@@ -178,11 +148,8 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(956, 483);
+            ClientSize = new Size(485, 285);
             Controls.Add(btnLogout);
-            Controls.Add(groupBox3);
-            Controls.Add(groupBox2);
-            Controls.Add(groupBox1);
             Controls.Add(btnCustomerOrder);
             Controls.Add(btnCustomerManagement);
             Controls.Add(btnPOS);
@@ -198,10 +165,6 @@
         }
 
         #endregion
-
-        private GroupBox groupBox3;
-        private GroupBox groupBox2;
-        private GroupBox groupBox1;
         private Button btnCustomerOrder;
         private Button btnCustomerManagement;
         private Button btnPOS;

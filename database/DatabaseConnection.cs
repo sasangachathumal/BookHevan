@@ -21,7 +21,7 @@ namespace BookHevan.database
         private DatabaseConnection()
         {
             string server = "localhost";
-            string port = "3307";
+            string port = "3306";
             string database = "bookhaven";
             string username = "root";
             string password = "";

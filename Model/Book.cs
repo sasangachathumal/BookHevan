@@ -114,20 +114,21 @@ namespace BookHevan.Model
         public bool update()
         {
             if (!int.IsPositive(id) || string.IsNullOrEmpty(title) || string.IsNullOrEmpty(author) || string.IsNullOrEmpty(isbn) ||
-                string.IsNullOrEmpty(genre) || !decimal.IsPositive(price) || !int.IsPositive(quantity))
+                string.IsNullOrEmpty(genre) || !decimal.IsPositive(price) || !int.IsPositive(quantity) || string.IsNullOrEmpty(supplier))
             {
                 return false;
             }
             try
             {
                 connection.Open();
-                string query = "UPDATE book SET title = @title, " +
+                string query = "UPDATE book SET supplier = @supplier, title = @title, " +
                     "author = @author, genre = @genre, isbn = @isbn, price = @price, quantity = @quantity " +
                     "WHERE id = @id";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
 
+                    cmd.Parameters.AddWithValue("@supplier", supplier);
                     cmd.Parameters.AddWithValue("@title", title);
                     cmd.Parameters.AddWithValue("@author", author);
                     cmd.Parameters.AddWithValue("@genre", genre);

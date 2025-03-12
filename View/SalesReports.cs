@@ -81,7 +81,7 @@ namespace BookHevan.View
                         dgvReport.DataSource = dailySales;
                     }
                     string counts = SalesReportsModel.getSalesCountsByDate(startDate);
-                    if (string.IsNullOrEmpty(counts))
+                    if (!string.IsNullOrEmpty(counts))
                     {
                         string[] results = counts.Split(',');
                         lblTotalSales.Text = results[0];
@@ -103,7 +103,7 @@ namespace BookHevan.View
                         dgvReport.DataSource = weeklySales;
                     }
                     string counts = SalesReportsModel.getSalesCountsByDateRange(startDate, endDate);
-                    if (string.IsNullOrEmpty(counts))
+                    if (!string.IsNullOrEmpty(counts))
                     {
                         string[] results = counts.Split(',');
                         lblTotalSales.Text = results[0];
@@ -124,7 +124,7 @@ namespace BookHevan.View
                         dgvReport.DataSource = monthlySales;
                     }
                     string counts = SalesReportsModel.getSalesCountsByDateRange(startDate, endDate);
-                    if (string.IsNullOrEmpty(counts))
+                    if (!string.IsNullOrEmpty(counts))
                     {
                         string[] results = counts.Split(',');
                         lblTotalSales.Text = results[0];

@@ -37,11 +37,16 @@
             btnSupplierOrder = new Button();
             btnSupplierManagement = new Button();
             btnUserManagement = new Button();
-            groupBox1 = new GroupBox();
-            groupBox2 = new GroupBox();
             groupBox3 = new GroupBox();
+            dgvInventoty = new DataGridView();
             button1 = new Button();
             btnLogout = new Button();
+            label2 = new Label();
+            label3 = new Label();
+            lblTotalSales = new Label();
+            lblTotalOrders = new Label();
+            groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvInventoty).BeginInit();
             SuspendLayout();
             // 
             // btnClose
@@ -182,32 +187,36 @@
             btnUserManagement.UseVisualStyleBackColor = false;
             btnUserManagement.Click += btnUserManagement_Click;
             // 
-            // groupBox1
-            // 
-            groupBox1.Location = new Point(12, 294);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(456, 147);
-            groupBox1.TabIndex = 27;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "groupBox1";
-            // 
-            // groupBox2
-            // 
-            groupBox2.Location = new Point(12, 447);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(456, 147);
-            groupBox2.TabIndex = 28;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "groupBox2";
-            // 
             // groupBox3
             // 
-            groupBox3.Location = new Point(487, 294);
+            groupBox3.Controls.Add(dgvInventoty);
+            groupBox3.Location = new Point(337, 246);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(456, 300);
+            groupBox3.Size = new Size(606, 348);
             groupBox3.TabIndex = 28;
             groupBox3.TabStop = false;
-            groupBox3.Text = "groupBox3";
+            groupBox3.Text = "Inventory List";
+            // 
+            // dgvInventoty
+            // 
+            dgvInventoty.AllowUserToAddRows = false;
+            dgvInventoty.AllowUserToDeleteRows = false;
+            dgvInventoty.AllowUserToResizeColumns = false;
+            dgvInventoty.AllowUserToResizeRows = false;
+            dgvInventoty.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvInventoty.BackgroundColor = Color.White;
+            dgvInventoty.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvInventoty.GridColor = Color.Black;
+            dgvInventoty.Location = new Point(6, 22);
+            dgvInventoty.MultiSelect = false;
+            dgvInventoty.Name = "dgvInventoty";
+            dgvInventoty.ReadOnly = true;
+            dgvInventoty.ShowCellErrors = false;
+            dgvInventoty.ShowCellToolTips = false;
+            dgvInventoty.ShowEditingIcon = false;
+            dgvInventoty.ShowRowErrors = false;
+            dgvInventoty.Size = new Size(594, 320);
+            dgvInventoty.TabIndex = 0;
             // 
             // button1
             // 
@@ -241,6 +250,49 @@
             btnLogout.UseVisualStyleBackColor = false;
             btnLogout.Click += btnLogout_Click;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            label2.Location = new Point(62, 272);
+            label2.Name = "label2";
+            label2.Size = new Size(154, 37);
+            label2.TabIndex = 0;
+            label2.Text = "Total Sales";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            label3.Location = new Point(51, 435);
+            label3.Name = "label3";
+            label3.Size = new Size(175, 37);
+            label3.TabIndex = 31;
+            label3.Text = "Total Orders";
+            // 
+            // lblTotalSales
+            // 
+            lblTotalSales.AutoSize = true;
+            lblTotalSales.FlatStyle = FlatStyle.Flat;
+            lblTotalSales.Font = new Font("Segoe UI", 18F);
+            lblTotalSales.Location = new Point(88, 333);
+            lblTotalSales.Name = "lblTotalSales";
+            lblTotalSales.Size = new Size(0, 32);
+            lblTotalSales.TabIndex = 32;
+            lblTotalSales.TextAlign = ContentAlignment.MiddleCenter;
+            lblTotalSales.UseWaitCursor = true;
+            // 
+            // lblTotalOrders
+            // 
+            lblTotalOrders.AutoSize = true;
+            lblTotalOrders.FlatStyle = FlatStyle.Flat;
+            lblTotalOrders.Font = new Font("Segoe UI", 18F);
+            lblTotalOrders.Location = new Point(88, 499);
+            lblTotalOrders.Name = "lblTotalOrders";
+            lblTotalOrders.Size = new Size(0, 32);
+            lblTotalOrders.TabIndex = 33;
+            lblTotalOrders.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // AdminDashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -248,11 +300,13 @@
             BackColor = Color.White;
             ClientSize = new Size(958, 603);
             ControlBox = false;
+            Controls.Add(lblTotalOrders);
+            Controls.Add(lblTotalSales);
+            Controls.Add(label3);
+            Controls.Add(label2);
             Controls.Add(btnLogout);
             Controls.Add(button1);
             Controls.Add(groupBox3);
-            Controls.Add(groupBox2);
-            Controls.Add(groupBox1);
             Controls.Add(btnUserManagement);
             Controls.Add(btnSupplierOrder);
             Controls.Add(btnSupplierManagement);
@@ -266,6 +320,9 @@
             Name = "AdminDashboard";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AdminDashboard";
+            Load += AdminDashboard_Load;
+            groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvInventoty).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -281,10 +338,13 @@
         private Button btnSupplierOrder;
         private Button btnSupplierManagement;
         private Button btnUserManagement;
-        private GroupBox groupBox1;
-        private GroupBox groupBox2;
         private GroupBox groupBox3;
         private Button button1;
         private Button btnLogout;
+        private Label label2;
+        private DataGridView dgvInventoty;
+        private Label label3;
+        private Label lblTotalSales;
+        private Label lblTotalOrders;
     }
 }

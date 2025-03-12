@@ -173,6 +173,7 @@ namespace BookHevan.View
             if (selectedCustomer.id > 0)
             {
                 // ser customer order data
+                newCustomerOrder.customerId = selectedCustomer.id;
                 newCustomerOrder.type = "POS";
                 newCustomerOrder.amount = decimal.Parse(txtNetAmount.Text);
                 // Check if the discount is empty
