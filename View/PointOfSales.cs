@@ -1,10 +1,17 @@
 ﻿using BookHevan.Helper;
 using BookHevan.Model;
+using iText.IO.Font.Constants;
+using iText.Kernel.Font;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -203,6 +210,7 @@ namespace BookHevan.View
                             Book.updateQuantity(item.id, (searchedBook.quantity - item.orderQuantity));
                         }
                     }
+                    printReceipt();
                     viewRest();
                     MessageBox.Show("Order successfully Placed.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -215,6 +223,81 @@ namespace BookHevan.View
             {
                 MessageBox.Show("Please select type", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+            }
+        }
+
+        private void printReceipt()
+        {
+            // Choose a file path to save the receipt
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                Filter = "PDF Files (*.pdf)|*.pdf",
+                FileName = $"Receipt-{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.pdf"
+            };
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = sfd.FileName;
+
+                using (PdfWriter writer = new PdfWriter(filePath))
+                using (PdfDocument pdf = new PdfDocument(writer))
+                using (Document document = new Document(pdf))
+                {
+                    PdfFont boldFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+                    // Add title
+                    document.Add(new Paragraph("Point Of Sale Receipt")
+                        .SetFont(boldFont)
+                        .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER));
+
+                    document.Add(new Paragraph($"Date: {DateTime.Now:yyyy-MM-dd HH:mm:ss}"));
+
+                    // Customer Info
+                    document.Add(new Paragraph("\nCustomer Information:").SetFont(boldFont));
+                    document.Add(new Paragraph($"Name: {lblCustPhoneNumber.Text}"));
+                    document.Add(new Paragraph($"Phone: {txtPhoneNo.Text}"));
+                    document.Add(new Paragraph($"Email: {lblCustEmail.Text}"));
+                    document.Add(new Paragraph($"Address: {lblCustAddress.Text}"));
+
+                    // Order Details Table
+                    Table table = new Table(5);
+                    table.AddHeaderCell("Title");
+                    table.AddHeaderCell("Author");
+                    table.AddHeaderCell("Price");
+                    table.AddHeaderCell("Quantity");
+                    table.AddHeaderCell("Total");
+
+                    foreach (DataGridViewRow row in dgvOrderDetail.Rows)
+                    {
+                        if (row.IsNewRow) continue;
+                        string title = row.Cells["title"].Value?.ToString() ?? "";
+                        string author = row.Cells["author"].Value?.ToString() ?? "";
+                        string price = row.Cells["price"].Value?.ToString() ?? "";
+                        string quantity = row.Cells["orderQuantity"].Value?.ToString() ?? "";
+                        decimal total = Convert.ToDecimal(price) * Convert.ToInt32(quantity);
+
+                        table.AddCell(title);
+                        table.AddCell(author);
+                        table.AddCell(price);
+                        table.AddCell(quantity);
+                        table.AddCell(total.ToString("F2"));
+                    }
+
+                    document.Add(table);
+
+                    // Total Amount
+                    document.Add(new Paragraph($"\nTotal Amount: {txtTotalAmount.Text}").SetFont(boldFont));
+                    document.Add(new Paragraph($"Discount: {txtDiscount.Text}"));
+                    document.Add(new Paragraph($"Net Amount: {txtNetAmount.Text}").SetFont(boldFont));
+
+                    MessageBox.Show("Receipt Generated Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                // Open the PDF file automatically after generation
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
+                {
+                    FileName = filePath,
+                    UseShellExecute = true
+                });
             }
         }
 

@@ -1,5 +1,7 @@
 ﻿using BookHevan.Helper;
 using BookHevan.Model;
+using iText.IO.Font.Constants;
+using iText.Kernel.Font;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
@@ -175,7 +177,7 @@ namespace BookHevan.View
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            // open file dialog to save the pdf
+            // Open file dialog to save the PDF
             SaveFileDialog sfd = new SaveFileDialog
             {
                 Filter = "PDF Files (*.pdf)|*.pdf",
@@ -184,7 +186,14 @@ namespace BookHevan.View
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                // Export the data grid view to pdf
+                // Ensure DataGridView has data
+                if (dgvReport.Rows.Count == 0)
+                {
+                    MessageBox.Show("No data to export!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Export to PDF
                 ExportDataGridViewToPDF(dgvReport, sfd.FileName);
                 MessageBox.Show("PDF Exported Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -193,30 +202,39 @@ namespace BookHevan.View
         private void ExportDataGridViewToPDF(DataGridView dgv, string filePath)
         {
             using (PdfWriter writer = new PdfWriter(filePath))
+            using (PdfDocument pdf = new PdfDocument(writer))
+            using (Document document = new Document(pdf))
             {
-                using (PdfDocument pdf = new PdfDocument(writer))
+                // Load a bold font explicitly
+                PdfFont boldFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+                PdfFont normalFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+
+                // Add title with bold font
+                document.Add(new Paragraph("Sales Report")
+                    .SetFont(boldFont) // Set explicitly bold font
+                    .SetFontSize(18)
+                    .SetTextAlignment(TextAlignment.CENTER));
+
+                // Create table with column count
+                Table table = new Table(dgv.ColumnCount);
+
+                // Add header row with bold font
+                foreach (DataGridViewColumn column in dgv.Columns)
                 {
-                    Document document = new Document(pdf);
-                    document.Add(new Paragraph("Sales Report").SetFontSize(18).SimulateBold().SetTextAlignment(TextAlignment.CENTER));
-
-                    Table table = new Table(dgv.ColumnCount);
-                    foreach (DataGridViewColumn column in dgv.Columns)
-                    {
-                        table.AddHeaderCell(new Cell().Add(new Paragraph(column.HeaderText).SimulateBold()));
-                    }
-
-                    foreach (DataGridViewRow row in dgv.Rows)
-                    {
-                        if (row.IsNewRow) continue;
-                        foreach (DataGridViewCell cell in row.Cells)
-                        {
-                            table.AddCell(new Cell().Add(new Paragraph(cell.Value?.ToString() ?? "")));
-                        }
-                    }
-
-                    document.Add(table);
-                    document.Close();
+                    table.AddHeaderCell(new Cell().Add(new Paragraph(column.HeaderText).SetFont(boldFont)));
                 }
+
+                // Add data rows with normal font
+                foreach (DataGridViewRow row in dgv.Rows)
+                {
+                    if (row.IsNewRow) continue;
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        table.AddCell(new Cell().Add(new Paragraph(cell.Value?.ToString() ?? "").SetFont(normalFont)));
+                    }
+                }
+
+                document.Add(table);
             }
         }
 

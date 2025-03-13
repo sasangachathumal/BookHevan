@@ -57,6 +57,7 @@
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
+            printDocument1 = new System.Drawing.Printing.PrintDocument();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvBooks).BeginInit();
             groupBox3.SuspendLayout();
@@ -489,5 +490,6 @@
         private TextBox txtSearchWord;
         private Button btnNewCustomer;
         private TextBox txtPhoneNo;
+        private System.Drawing.Printing.PrintDocument printDocument1;
     }
 }
