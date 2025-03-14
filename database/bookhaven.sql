@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2025 at 08:51 PM
+-- Generation Time: Mar 14, 2025 at 05:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,20 +44,20 @@ CREATE TABLE `book` (
 
 INSERT INTO `book` (`id`, `supplier`, `title`, `author`, `genre`, `isbn`, `price`, `quantity`) VALUES
 (4, 'ABC Publishers', 'The Road From Elephant Pass', 'Nihal De Silva', 'Fiction', '9789558095923', 2500.00, 20),
-(5, 'New Era Books', 'Chinaman: The Legend of Pradeep Mathew', 'Shehan Karunatilaka', 'Fiction', '9780143459667', 2800.00, 27),
-(6, 'ABC Publishers', 'The English Patient', 'Michael Ondaatje', 'Historical', '9780679745204', 3200.00, 28),
-(7, 'XYZ Books Distributors', 'Reef', 'Romesh Gunesekera', 'Fiction', '9781862073235', 2200.00, 23),
+(5, 'New Era Books', 'Chinaman: The Legend of Pradeep Mathew', 'Shehan Karunatilaka', 'Fiction', '9780143459667', 2800.00, 25),
+(6, 'ABC Publishers', 'The English Patient', 'Michael Ondaatje', 'Historical', '9780679745204', 3200.00, 26),
+(7, 'XYZ Books Distributors', 'Reef', 'Romesh Gunesekera', 'Fiction', '9781862073235', 2200.00, 22),
 (8, 'Read Lanka Ltd.', 'Funny Boy', 'Shyam Selvadurai', 'Coming-of-age', '9780156031709', 2600.00, 28),
 (9, 'Read Lanka Ltd.', 'Sam’s Story', 'Elmo Jayawardena', 'Fiction', '9789551723229', 2300.00, 31),
-(10, 'New Era Books', 'Wave', 'Sonali Deraniyagala', 'Memoir', '9780345807022', 2900.00, 25),
+(10, 'New Era Books', 'Wave', 'Sonali Deraniyagala', 'Memoir', '9780345807022', 2900.00, 24),
 (11, 'ABC Publishers', 'Island of a Thousand Mirrors', 'Nayomi Munaweera', 'Fiction', '9781250055796', 2700.00, 16),
 (12, 'XYZ Books Distributors', 'The Ceaseless Chatter of Demons', 'Ashok Ferrey', 'Fiction', '9789386850052', 2400.00, 22),
 (13, 'ABC Publishers', 'The Lament of the Dhobi Woman', 'Karen Roberts', 'Fiction', '9780552149725', 2000.00, 32),
-(14, 'Read Lanka Ltd.', 'A Cause Untrue', 'David Blacker', 'Thriller', '9789554500056', 3000.00, 22),
+(14, 'Read Lanka Ltd.', 'A Cause Untrue', 'David Blacker', 'Thriller', '9789554500056', 3000.00, 20),
 (15, 'Read Lanka Ltd.', 'The Prisoner of Paradise', 'Romesh Gunesekera', 'Historical', '9781408827675', 2800.00, 18),
-(16, 'New Era Books', 'Rainbows in Braille', 'Chandani Lokuge', 'Fiction', '9780143102181', 2600.00, 10),
-(17, 'New Era Books', 'July', 'Karen Roberts', 'Fiction', '9781841154745', 2500.00, 19),
-(18, 'ABC Publishers', 'Once Upon a Tender Time', 'Patrick Fernando', 'Poetry', '9789556650070', 1800.00, 28);
+(16, 'New Era Books', 'Rainbows in Braille', 'Chandani Lokuge', 'Fiction', '9780143102181', 2600.00, 8),
+(17, 'New Era Books', 'July', 'Karen Roberts', 'Fiction', '9781841154745', 2500.00, 18),
+(18, 'ABC Publishers', 'Once Upon a Tender Time', 'Patrick Fernando', 'Poetry', '9789556650070', 1800.00, 26);
 
 -- --------------------------------------------------------
 
@@ -112,7 +112,11 @@ INSERT INTO `customerorder` (`id`, `customerId`, `userId`, `date`, `amount`, `di
 (14, 4, 8, '2025-03-12', 5300.00, 0, 2, 'delivery'),
 (25, 4, 8, '2025-03-13', 2800.00, 0, 1, 'POS'),
 (26, 4, 8, '2025-03-13', 2600.00, 0, 1, 'POS'),
-(27, 4, 8, '2025-03-13', 5300.00, 0, 2, 'POS');
+(27, 4, 8, '2025-03-13', 5300.00, 0, 2, 'POS'),
+(28, 7, 8, '2025-03-13', 6200.00, 0, 2, 'POS'),
+(29, 7, 8, '2025-03-13', 8300.00, 0, 3, 'POS'),
+(30, 8, 8, '2025-03-13', 10300.00, 0, 4, 'POS'),
+(31, 8, 8, '2025-03-13', 9600.00, 0, 4, 'POS');
 
 -- --------------------------------------------------------
 
@@ -147,7 +151,19 @@ INSERT INTO `custorderdetails` (`custOrderId`, `bookId`, `quantity`) VALUES
 (25, 5, 1),
 (26, 8, 1),
 (27, 17, 1),
-(27, 15, 1);
+(27, 15, 1),
+(28, 6, 1),
+(28, 14, 1),
+(29, 6, 1),
+(29, 17, 1),
+(29, 16, 1),
+(30, 5, 2),
+(30, 10, 1),
+(30, 18, 1),
+(31, 7, 1),
+(31, 16, 1),
+(31, 14, 1),
+(31, 18, 1);
 
 -- --------------------------------------------------------
 
@@ -221,7 +237,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `fullName`, `username`, `password`, `phoneNo`, `type`) VALUES
 (8, 'admin', 'admin', '$2a$11$HxWtkCt7ZgyGqfys6LPcGOkpcs4T21U4AntbcUBRxsEVLb..wmRjy', '0710453447', 'Admin'),
-(9, 'Staff', 'staff', '$2a$11$YsyAWwifGuw2hH5CqXVLQOCox5NRfqZs8HvST4HuHbWuiSvzlAumC', '0751156985', 'Sales Clerk');
+(9, 'Staff', 'staff', '$2a$11$YsyAWwifGuw2hH5CqXVLQOCox5NRfqZs8HvST4HuHbWuiSvzlAumC', '0751156985', 'Sales Clerk'),
+(10, 'Admin User', 'adminuser', '$2a$11$TPA8RdoI0gtVYl0sQPXV1.QbdnEg2bLFZiFw7s2wMz2JNxRNeFliC', '0710235994', 'Admin'),
+(11, 'Sales Clerk', 'salesclerk', '$2a$11$ojqRmOd7AaO5mWWqBEMqi.iqeXaBOwwu4hu08kXvvsrh.77iUmZRy', '0774525549', 'Sales Clerk');
 
 --
 -- Indexes for dumped tables
@@ -300,7 +318,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `customerorder`
 --
 ALTER TABLE `customerorder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `supplier`
@@ -318,7 +336,7 @@ ALTER TABLE `supplierorder`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables

@@ -24,7 +24,7 @@ namespace BookHevan.Helper
                 if (searchUser.id != 0 && searchUser.password != null)
                 {
                     // Verify password
-                    bool isVerify = PasswordSecurity.VerifyPassword(user.username, searchUser.password);
+                    bool isVerify = PasswordSecurity.VerifyPassword(user.password, searchUser.password);
                     if (isVerify)
                     {
                         // Set user session

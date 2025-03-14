@@ -30,7 +30,7 @@ namespace BookHevan.Helper
         public static bool isAllLetters(KeyPressEventArgs e)
         {
             // Allow only English letters (both upper and lower case) and control characters (like backspace)
-            return (!Char.IsLetter(e.KeyChar) && !Char.IsControl(e.KeyChar));
+            return (!Char.IsLetter(e.KeyChar) && !Char.IsControl(e.KeyChar) && !Char.IsWhiteSpace(e.KeyChar));
         }
 
         /**
