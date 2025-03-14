@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2025 at 04:57 PM
+-- Generation Time: Mar 12, 2025 at 08:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,19 +44,19 @@ CREATE TABLE `book` (
 
 INSERT INTO `book` (`id`, `supplier`, `title`, `author`, `genre`, `isbn`, `price`, `quantity`) VALUES
 (4, 'ABC Publishers', 'The Road From Elephant Pass', 'Nihal De Silva', 'Fiction', '9789558095923', 2500.00, 20),
-(5, 'New Era Books', 'Chinaman: The Legend of Pradeep Mathew', 'Shehan Karunatilaka', 'Fiction', '9780143459667', 2800.00, 28),
+(5, 'New Era Books', 'Chinaman: The Legend of Pradeep Mathew', 'Shehan Karunatilaka', 'Fiction', '9780143459667', 2800.00, 27),
 (6, 'ABC Publishers', 'The English Patient', 'Michael Ondaatje', 'Historical', '9780679745204', 3200.00, 28),
 (7, 'XYZ Books Distributors', 'Reef', 'Romesh Gunesekera', 'Fiction', '9781862073235', 2200.00, 23),
-(8, 'Read Lanka Ltd.', 'Funny Boy', 'Shyam Selvadurai', 'Coming-of-age', '9780156031709', 2600.00, 29),
+(8, 'Read Lanka Ltd.', 'Funny Boy', 'Shyam Selvadurai', 'Coming-of-age', '9780156031709', 2600.00, 28),
 (9, 'Read Lanka Ltd.', 'Sam’s Story', 'Elmo Jayawardena', 'Fiction', '9789551723229', 2300.00, 31),
 (10, 'New Era Books', 'Wave', 'Sonali Deraniyagala', 'Memoir', '9780345807022', 2900.00, 25),
 (11, 'ABC Publishers', 'Island of a Thousand Mirrors', 'Nayomi Munaweera', 'Fiction', '9781250055796', 2700.00, 16),
 (12, 'XYZ Books Distributors', 'The Ceaseless Chatter of Demons', 'Ashok Ferrey', 'Fiction', '9789386850052', 2400.00, 22),
 (13, 'ABC Publishers', 'The Lament of the Dhobi Woman', 'Karen Roberts', 'Fiction', '9780552149725', 2000.00, 32),
 (14, 'Read Lanka Ltd.', 'A Cause Untrue', 'David Blacker', 'Thriller', '9789554500056', 3000.00, 22),
-(15, 'Read Lanka Ltd.', 'The Prisoner of Paradise', 'Romesh Gunesekera', 'Historical', '9781408827675', 2800.00, 19),
+(15, 'Read Lanka Ltd.', 'The Prisoner of Paradise', 'Romesh Gunesekera', 'Historical', '9781408827675', 2800.00, 18),
 (16, 'New Era Books', 'Rainbows in Braille', 'Chandani Lokuge', 'Fiction', '9780143102181', 2600.00, 10),
-(17, 'New Era Books', 'July', 'Karen Roberts', 'Fiction', '9781841154745', 2500.00, 20),
+(17, 'New Era Books', 'July', 'Karen Roberts', 'Fiction', '9781841154745', 2500.00, 19),
 (18, 'ABC Publishers', 'Once Upon a Tender Time', 'Patrick Fernando', 'Poetry', '9789556650070', 1800.00, 28);
 
 -- --------------------------------------------------------
@@ -109,7 +109,10 @@ INSERT INTO `customerorder` (`id`, `customerId`, `userId`, `date`, `amount`, `di
 (11, 4, 8, '2025-03-12', 8400.00, 0, 3, 'Pick up'),
 (12, 8, 8, '2025-03-12', 9500.00, 0, 4, 'Pick up'),
 (13, 6, 8, '2025-03-12', 11800.00, 0, 5, 'Pick up'),
-(14, 4, 8, '2025-03-12', 5300.00, 0, 2, 'delivery');
+(14, 4, 8, '2025-03-12', 5300.00, 0, 2, 'delivery'),
+(25, 4, 8, '2025-03-13', 2800.00, 0, 1, 'POS'),
+(26, 4, 8, '2025-03-13', 2600.00, 0, 1, 'POS'),
+(27, 4, 8, '2025-03-13', 5300.00, 0, 2, 'POS');
 
 -- --------------------------------------------------------
 
@@ -140,7 +143,11 @@ INSERT INTO `custorderdetails` (`custOrderId`, `bookId`, `quantity`) VALUES
 (13, 14, 1),
 (13, 18, 1),
 (14, 15, 1),
-(14, 17, 1);
+(14, 17, 1),
+(25, 5, 1),
+(26, 8, 1),
+(27, 17, 1),
+(27, 15, 1);
 
 -- --------------------------------------------------------
 
@@ -246,7 +253,7 @@ ALTER TABLE `customerorder`
 -- Indexes for table `custorderdetails`
 --
 ALTER TABLE `custorderdetails`
-  ADD KEY (`custOrderId`,`bookId`),
+  ADD KEY `custOrderId` (`custOrderId`,`bookId`),
   ADD KEY `bookId` (`bookId`);
 
 --
@@ -293,7 +300,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `customerorder`
 --
 ALTER TABLE `customerorder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `supplier`
